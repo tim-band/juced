@@ -20,11 +20,11 @@ package.libpaths = {
 }
 
 package.config["Debug"].links = { 
-    "freetype", "pthread", "rt", "X11", "GL", "GLU", "Xinerama", "asound", "juce_debug", "m", "gomp"
+    "juce_debug", "freetype", "pthread", "rt", "X11", "GL", "GLU", "Xinerama", "asound", "m", "gomp"
 }
 
 package.config["Release"].links = { 
-    "freetype", "pthread", "rt", "X11", "GL", "GLU", "Xinerama", "asound", "juce", "m", "gomp"
+    "juce", "freetype", "pthread", "rt", "X11", "GL", "GLU", "Xinerama", "asound", "m", "gomp"
 }
 
 package.config["Debug"].buildoptions = {

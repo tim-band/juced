@@ -59,6 +59,7 @@
 #include <sys/sysinfo.h>
 #include <sys/file.h>
 #include <signal.h>
+#include <unistd.h>
 
 /* Got a build error here? You'll need to install the freetype library...
    The name of the package to install is "libfreetype6-dev".

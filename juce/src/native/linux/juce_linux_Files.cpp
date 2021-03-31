@@ -378,8 +378,8 @@ void* juce_findFileStart (const String& directory, const String& wildCard, Strin
         else
         {
             firstResultFile = String::empty;
-            isDir = false;
-            isHidden = false;
+            *isDir = false;
+            *isHidden = false;
             closedir (d);
             delete ff;
         }

@@ -36,11 +36,11 @@ package.libpaths = {
 }
 
 package.config["Debug"].links = {
-    "freetype", "pthread", "rt", "X11", "GL", "GLU", "Xinerama", "asound", "juce_debug"
+    "juce_debug", "freetype", "pthread", "rt", "X11", "GL", "GLU", "Xinerama", "asound"
 }
 
 package.config["Release"].links = {
-    "freetype", "pthread", "rt", "X11", "GL", "GLU", "Xinerama", "asound", "juce"
+    "juce", "freetype", "pthread", "rt", "X11", "GL", "GLU", "Xinerama", "asound"
 }
 
 package.files = {

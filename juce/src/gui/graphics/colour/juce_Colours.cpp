@@ -177,7 +177,7 @@ const Colour Colours::yellowgreen (0xff9acd32);
 const Colour Colours::findColourForName (const String& colourName,
                                          const Colour& defaultColour)
 {
-    static const int presets[] =
+    static const unsigned int presets[] =
     {
         // (first value is the string's hashcode, second is ARGB)
 

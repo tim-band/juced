@@ -12,6 +12,10 @@
 *.la
 *.a
 
+# Other intermediate files
+Makefile
+*.make
+
 # unwanted files
 bin/*
 vst/vstsdk*/
