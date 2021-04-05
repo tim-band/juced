@@ -23,7 +23,7 @@
 #define __IRPLOT_H__
 
 
-#include "juce_amalgamated.h"
+#include "juce.h"
 #include "../ParamEnvelope.h"
 
 

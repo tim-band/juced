@@ -1,19 +1,15 @@
 
 dofile ("../../../../tools/linux/premake.lua")
 
-package = make_plugin_project ("soundcrabvst", "dll", true, false)
+make_plugin_project ("soundcrabvst", "SharedLib", true, false)
 
-table.insert (package.includepaths, 1, "../../src")
-table.insert (package.includepaths, 1, "../../src/Synth")
-table.insert (package.defines, "HAVE_CONFIG_H=1")
+includedirs { "../../src", "../../src/Synth" }
 
-table.insert (package.defines, "XSOUNDCRAB_VST_PLUGIN=1")
+defines { "HAVE_CONFIG_H=1", "XSOUNDCRAB_VST_PLUGIN=1" }
 
-package.files = {
-    matchrecursive (
-        "../../src/*.h",
-        "../../src/*.c",
-        "../../src/*.cpp"
-    )
+files {
+    "../../src/**.h",
+    "../../src/**.c",
+    "../../src/**.cpp"
 }
 

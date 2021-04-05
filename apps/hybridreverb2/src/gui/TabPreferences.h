@@ -23,7 +23,7 @@
 #define __JUCER_HEADER_TABPREFERENCES_TABPREFERENCES_22742E3D__
 
 //[Headers]     -- You can add your own extra header files here --
-#include "juce_amalgamated.h"
+#include "juce.h"
 #include "../ParamPreferences.h"
 
 // forward declarations

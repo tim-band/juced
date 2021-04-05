@@ -252,11 +252,10 @@ void XAnalyzerComponent::plot_ascale (Graphics& g)
 
 void XAnalyzerComponent::plot_fscale (Graphics& g)
 {
-    int         i, d, x, y;
+    int         i, x, y;
     int         sk1, sk2; 
     float       s;
     const char  **p;
-    float       ascent = Font (10.0f).getAscent();
 
     g.setColour (Colours::grey);
 
@@ -286,7 +285,8 @@ void XAnalyzerComponent::plot_fscale (Graphics& g)
     }
     else if (_fmode == 0) p = _f440str;
 
-    d = ascent + 2;
+    //float ascent = Font (10.0f).getAscent();
+    //int d = ascent + 2;
     x = 0;
 
     for (i = 0; i <= 30; i++, sk1 >>= 1, sk2 >>= 1) 

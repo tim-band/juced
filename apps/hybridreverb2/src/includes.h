@@ -21,4 +21,4 @@
 
 #include "juce_AppConfig.h"
 
-#include "../../juce/juce_amalgamated.h"
+#include "../../juce/juce.h"

@@ -1719,13 +1719,17 @@ void XSynthPatch::setOscillatorNumber (const int newOscNumber, const bool isMagn
 
     switch (oscNumber) {
         case 0: if (isMagnitude) osc1Select->setColour (TextButton::buttonColourId, Colours::lightblue);
-                else             osc1SelectPhase->setColour (TextButton::buttonColourId, Colours::violet); break;
+                else             osc1SelectPhase->setColour (TextButton::buttonColourId, Colours::violet);
+                break;
         case 1: if (isMagnitude) osc2Select->setColour (TextButton::buttonColourId, Colours::lightblue);
-                else             osc2SelectPhase->setColour (TextButton::buttonColourId, Colours::violet); break;
+                else             osc2SelectPhase->setColour (TextButton::buttonColourId, Colours::violet);
+                break;
         case 2: if (isMagnitude) osc3Select->setColour (TextButton::buttonColourId, Colours::lightblue);
-                else             osc3SelectPhase->setColour (TextButton::buttonColourId, Colours::violet); break;
+                else             osc3SelectPhase->setColour (TextButton::buttonColourId, Colours::violet);
+                break;
         case 3: if (isMagnitude) osc4Select->setColour (TextButton::buttonColourId, Colours::lightblue);
-                else             osc4SelectPhase->setColour (TextButton::buttonColourId, Colours::violet); break;
+                else             osc4SelectPhase->setColour (TextButton::buttonColourId, Colours::violet);
+                break;
     }
 
     partials->setVisualMode (isMagnitude ? OscillatorPartials::MagnitudeMode : OscillatorPartials::PhaseMode);

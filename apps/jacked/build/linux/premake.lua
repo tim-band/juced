@@ -1,15 +1,13 @@
 
 dofile ("../../../../tools/linux/premake.lua")
 
-package = make_plugin_project ("jacked", "exe", true, false)
+make_plugin_project ("jacked", "WindowedApp", true, false)
 
-table.insert (package.includepaths, "../../src")
-table.insert (package.links, "jack")
+includedirs { "../../src" }
+links { "jack" }
 
-package.files = {
-    matchrecursive (
-        "../../src/*.h",
-        "../../src/*.cpp"
-    )
+files {
+        "../../src/**.h",
+        "../../src/**.cpp"
 }
 

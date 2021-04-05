@@ -48,19 +48,19 @@ bool Params::Validate()
 }
 
 Params::Param::Param( u32 width, u32 height, const char* name, const char* unit, float* ctrl, Mode m, float mv, float r, bool* dirty_flag )
-:unit_(unit)
+:screenw_(width)
+,screenh_(height)
+,screenx_(0)
+,screeny_(0)
+,unit_(unit)
 ,slider_pos_(0)
 ,ctrl_(ctrl)
 ,mode_(m)
 ,mid_value_(mv)
 ,range_(r)
-,screenw_(width)
-,screenh_(height)
-,screenx_(0)
-,screeny_(0)
 ,dirty_flag_(dirty_flag)
 {
-	char* s = strchr( name, '|' );
+	const char* s = strchr( name, '|' );
 	if (s)
 	{
         short_name_.assign( name, s - name );

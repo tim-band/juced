@@ -486,8 +486,6 @@ void MasterAndCommander::registerFreqPlot(FreqPlot *plot)
 
 void MasterAndCommander::updateOriginal(void)
 {
-    SampleData *dataCurrent = 0;
-
     updateTimbre();
 }
 
@@ -513,11 +511,7 @@ void MasterAndCommander::updateTimbre(void)
 
 void MasterAndCommander::updateModulation(void)
 {
-    SampleData *dataCurrent = 0;
-
-    if (enabledTimbre)
-        dataCurrent = dataTimbre;
-    else dataCurrent = dataOriginal;
+    //SampleData *dataCurrent = enabledTimbre? dataTimbre : dataOriginal;
 
     printf("enabledModulation = %d\n", enabledModulation);
     if (enabledModulation)

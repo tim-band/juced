@@ -30,7 +30,7 @@ enum CONST_PARTITIONER {
 };
 
 
-#include "juce_amalgamated.h"
+#include "juce.h"
 #include "ParamPartitionWisdom.h"
 
 

@@ -1,13 +1,10 @@
 
 dofile ("../../../../tools/linux/premake.lua")
 
-package = make_plugin_project ("jost", "exe", true, false)
-package = configure_jost_libraries (package, true)
+make_plugin_project ("jost", "WindowedApp", true, false)
+configure_jost_libraries (true)
 
-package.files = {
-    matchrecursive (
-        "../../src/*.h",
-        "../../src/*.cpp"
-    )
+files {
+    "../../src/**.h",
+    "../../src/**.cpp"
 }
-

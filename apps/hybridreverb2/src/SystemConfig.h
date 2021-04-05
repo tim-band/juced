@@ -29,7 +29,7 @@
 #include <tchar.h>
 #endif
 
-#include "juce_amalgamated.h"
+#include "juce.h"
 #include "ParamPreferences.h"
 #include "ParamPartitionWisdom.h"
 

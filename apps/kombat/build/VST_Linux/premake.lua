@@ -1,19 +1,15 @@
 
 dofile ("../../../../tools/linux/premake.lua")
 
-package = make_plugin_project ("kombat", "dll", true, false)
+make_plugin_project ("kombat", "SharedLib", true, false)
 
-table.insert (package.includepaths, "../../src")
+includedirs { "../../src" }
 
-package.files = {
-    matchfiles (
-        "../../../../wrapper/*.h",
-        "../../../../wrapper/*.cpp",
-        "../../../../wrapper/formats/VST/*.cpp"
-    ),
-    matchrecursive (
-        "../../src/*.h",
-        "../../src/*.cpp"
-    )
+files {
+    "../../../../wrapper/*.h",
+    "../../../../wrapper/*.cpp",
+    "../../../../wrapper/formats/VST/*.cpp",
+    "../../src/**.h",
+    "../../src/**.cpp"
 }
 

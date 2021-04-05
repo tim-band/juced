@@ -10,11 +10,11 @@ build_directory="build"
 bin_directory="bin"
 src_directory="src"
 
-premake_file="--file premake.lua"
-premake_options="--target gnu --os linux"
-premake_win32_options="--target vs2010 --os windows"
+premake_file="--file=premake.lua"
+premake_options="gmake"
+premake_win32_options="vs2015"
 
-premake_bin="$tools_directory/premake"
+premake_bin="premake4"
 
 OPERATION="usage"
 SUBJECTS="lib"

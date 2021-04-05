@@ -257,7 +257,7 @@ void wolp::processBlock(AudioSampleBuffer& buffer, MidiBuffer& midiMessages)
 		if(out1[i]<-clp) out1[i]= -clp; else if(out1[i]>clp) out1[i]= clp;
 	}
 
-    editor *e= (editor*)getActiveEditor();
+//    editor *e= (editor*)getActiveEditor();
 //    if(e) e->updateparams();
 }
 

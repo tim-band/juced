@@ -36,6 +36,12 @@
 #ifndef __JUCETICE_FASTDELEGATES_HEADER__
 #define __JUCETICE_FASTDELEGATES_HEADER__
 
+#if __cplusplus>199711
+#define STATIC_ASSERT(p, id, msg) static_assert(p,#id ": " msg)
+#else
+#define STATIC_ASSERT(p, id, msg) typedef int ERROR_ ## id[(p) ? 1 : -1];
+#endif
+
 /*
 // It's a really boring example, but it shows the most important cases.
 
@@ -298,11 +304,10 @@ union horrible_union{
 template <class OutputClass, class InputClass>
 inline OutputClass horrible_cast(const InputClass input){
 	horrible_union<OutputClass, InputClass> u;
-	// Cause a compile-time error if in, out and u are not the same size.
-	// If the compile fails here, it means the compiler has peculiar
-	// unions which would prevent the cast from working.
-	typedef int ERROR_CantUseHorrible_cast[sizeof(InputClass)==sizeof(u)
-		&& sizeof(InputClass)==sizeof(OutputClass) ? 1 : -1];
+	STATIC_ASSERT(sizeof(InputClass)==sizeof(u)
+		&& sizeof(InputClass)==sizeof(OutputClass),
+		CantUseHorrible_cast,
+		"InputClass and OutputClass must be the same size");
 	u.in = input;
 	return u.out;
 }
@@ -416,9 +421,8 @@ struct SimplifyMemFunc {
 	template <class X, class XFuncType, class GenericMemFuncType>
 	inline static GenericClass *Convert(X *pthis, XFuncType function_to_bind,
 		GenericMemFuncType &bound_func) {
-		// Unsupported member function type -- force a compile failure.
-	    // (it's illegal to have a array with negative size).
-		typedef char ERROR_Unsupported_member_function_pointer_on_this_compiler[N-100];
+		STATIC_ASSERT(100<=N, Unsupported_member_function_pointer_on_this_compiler,
+			"Unsupported member function type in SimplifyMemFunc");
 		return 0;
 	}
 };
@@ -900,11 +904,11 @@ public:
 			bindmemfunc(pParent, static_function_invoker);
         }
 
-		// WARNING! Evil hack. We store the function in the 'this' pointer!
-		// Ensure that there's a compilation failure if function pointers
-		// and data pointers have different sizes.
-		// If you get this error, you need to #undef FASTDELEGATE_USESTATICFUNCTIONHACK.
-		typedef int ERROR_CantUseEvilMethod[sizeof(GenericClass *)==sizeof(function_to_bind) ? 1 : -1];
+		STATIC_ASSERT(sizeof(GenericClass *)==sizeof(function_to_bind), CantUseEvilMethod,
+			"Evil hack. We store the function in the 'this' pointer! "
+			"Ensure that there's a compilation failure if function pointers "
+			"and data pointers have different sizes. "
+			"If you get this error, you need to #undef FASTDELEGATE_USESTATICFUNCTIONHACK");
 		m_pthis = horrible_cast<GenericClass *>(function_to_bind);
 		// MSVC, SunC++ and DMC accept the following (non-standard) code:
 //		m_pthis = static_cast<GenericClass *>(static_cast<void *>(function_to_bind));
@@ -916,10 +920,10 @@ public:
 	// We're just returning the 'this' pointer, converted into
 	// a function pointer!
 	inline UnvoidStaticFuncPtr GetStaticFunction() const {
-		// Ensure that there's a compilation failure if function pointers
-		// and data pointers have different sizes.
-		// If you get this error, you need to #undef FASTDELEGATE_USESTATICFUNCTIONHACK.
-		typedef int ERROR_CantUseEvilMethod[sizeof(UnvoidStaticFuncPtr)==sizeof(this) ? 1 : -1];
+		STATIC_ASSERT(sizeof(UnvoidStaticFuncPtr)==sizeof(this),
+			CantUseEvilMethod,
+			"function pointers and data pointers have different sizes."
+			"you need to #undef FASTDELEGATE_USESTATICFUNCTIONHACK.");
 		return horrible_cast<UnvoidStaticFuncPtr>(this);
 	}
 #endif // !defined(FASTDELEGATE_USESTATICFUNCTIONHACK)

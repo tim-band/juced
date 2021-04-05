@@ -23,7 +23,7 @@
 #define __JUCER_HEADER_TABMAIN_TABMAIN_FF5AE30C__
 
 //[Headers]     -- You can add your own extra header files here --
-#include "juce_amalgamated.h"
+#include "juce.h"
 #include "../ParamGainDelay.h"
 #include "../ParamEnvelope.h"
 #include "../TextList.h"

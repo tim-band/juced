@@ -580,7 +580,7 @@ void editor::sliderValueChanged (Slider* sliderThatWasMoved)
 
 void editor::changeListenerCallback(void *objectThatHasChanged)
 {
-    int idx= (int)objectThatHasChanged;
+    unsigned long long idx= (unsigned long long)objectThatHasChanged;
     if(idx==wolp::curcutoff)
     {
         wolp *synth= (wolp*)getAudioProcessor();

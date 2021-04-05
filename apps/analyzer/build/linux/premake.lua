@@ -1,13 +1,11 @@
 
 dofile ("../../../../tools/linux/premake.lua")
 
-package = make_plugin_project ("analyzer", "exe", true, false)
+make_plugin_project ("analyzer", "WindowedApp", true, false)
 
-package.files = {
-    matchrecursive (
-        "../../src/*.h",
-        "../../src/*.cc",
-        "../../src/*.cpp"
-    )
+files {
+    "../../src/**.h",
+    "../../src/**.cc",
+    "../../src/**.cpp"
 }
 

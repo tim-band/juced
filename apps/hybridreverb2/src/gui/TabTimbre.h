@@ -23,7 +23,7 @@
 #define __JUCER_HEADER_TABTIMBRE_TABTIMBRE_1CFF6033__
 
 //[Headers]     -- You can add your own extra header files here --
-#include "juce_amalgamated.h"
+#include "juce.h"
 #include "../ParamTimbre.h"
 
 #include <fftw3.h>

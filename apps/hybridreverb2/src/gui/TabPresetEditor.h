@@ -23,7 +23,7 @@
 #define __JUCER_HEADER_TABPRESETEDITOR_TABPRESETEDITOR_23EBC2D4__
 
 //[Headers]     -- You can add your own extra header files here --
-#include "juce_amalgamated.h"
+#include "juce.h"
 
 // forward declarations
 class MasterAndCommander;

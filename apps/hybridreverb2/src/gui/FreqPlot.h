@@ -23,7 +23,7 @@
 #define __FREQPLOT_H__
 
 
-#include "juce_amalgamated.h"
+#include "juce.h"
 
 
 // forward declarations

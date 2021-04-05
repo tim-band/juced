@@ -1,6 +1,6 @@
 /*
    AngelCode Scripting Library
-   Copyright (c) 2003-2009 Andreas Jonsson
+   Copyright (c) 2003-2020 Andreas Jonsson
 
    This software is provided 'as-is', without any express or implied 
    warranty. In no event will the authors be held liable for any 
@@ -40,13 +40,13 @@
 #include "as_config.h"
 #include "as_configgroup.h"
 #include "as_scriptengine.h"
+#include "as_texts.h"
 
 BEGIN_AS_NAMESPACE
 
 asCConfigGroup::asCConfigGroup()
 {
 	refCount = 0;
-	defaultAccess = true;
 }
 
 asCConfigGroup::~asCConfigGroup()
@@ -66,11 +66,11 @@ int asCConfigGroup::Release()
 	return refCount;
 }
 
-asCObjectType *asCConfigGroup::FindType(const char *obj)
+asCTypeInfo *asCConfigGroup::FindType(const char *obj)
 {
-	for( asUINT n = 0; n < objTypes.GetLength(); n++ )
-		if( objTypes[n]->name == obj )
-			return objTypes[n];
+	for( asUINT n = 0; n < types.GetLength(); n++ )
+		if( types[n]->name == obj )
+			return types[n];
 
 	return 0;
 }
@@ -88,16 +88,35 @@ void asCConfigGroup::RefConfigGroup(asCConfigGroup *group)
 	group->AddRef();
 }
 
-bool asCConfigGroup::HasLiveObjects(asCScriptEngine * /*engine*/)
+void asCConfigGroup::AddReferencesForFunc(asCScriptEngine *engine, asCScriptFunction *func)
 {
-	for( asUINT n = 0; n < objTypes.GetLength(); n++ )
-		if( objTypes[n]->GetRefCount() != 0 )
+	AddReferencesForType(engine, func->returnType.GetTypeInfo());
+	for( asUINT n = 0; n < func->parameterTypes.GetLength(); n++ )
+		AddReferencesForType(engine, func->parameterTypes[n].GetTypeInfo());
+}
+
+void asCConfigGroup::AddReferencesForType(asCScriptEngine *engine, asCTypeInfo *type)
+{
+	if( type == 0 ) return;
+
+	// Keep reference to other groups
+	RefConfigGroup(engine->FindConfigGroupForTypeInfo(type));
+
+	// Keep track of which generated template instances the config group uses
+	if( type->flags & asOBJ_TEMPLATE && engine->generatedTemplateTypes.Exists(CastToObjectType(type)) && !generatedTemplateInstances.Exists(CastToObjectType(type)) )
+		generatedTemplateInstances.PushLast(CastToObjectType(type));
+}
+
+bool asCConfigGroup::HasLiveObjects()
+{
+	for( asUINT n = 0; n < types.GetLength(); n++ )
+		if( types[n]->externalRefCount.get() != 0 )
 			return true;
 
 	return false;
 }
 
-void asCConfigGroup::RemoveConfiguration(asCScriptEngine *engine)
+void asCConfigGroup::RemoveConfiguration(asCScriptEngine *engine, bool notUsed)
 {
 	asASSERT( refCount == 0 );
 
@@ -106,160 +125,85 @@ void asCConfigGroup::RemoveConfiguration(asCScriptEngine *engine)
 	// Remove global variables
 	for( n = 0; n < globalProps.GetLength(); n++ )
 	{
-		int index = engine->registeredGlobalProps.IndexOf(globalProps[n]);
+		int index = engine->registeredGlobalProps.GetIndex(globalProps[n]);
 		if( index >= 0 )
 		{
-			asDELETE(engine->registeredGlobalProps[index],asCGlobalProperty);
-			engine->registeredGlobalProps[index] = 0;
+			globalProps[n]->Release();
+
+			engine->registeredGlobalProps.Erase(index);
 		}
 	}
-
-	// Remove global behaviours
-	for( n = 0; n < globalBehaviours.GetLength(); n++ )
-	{
-		int id = engine->globalBehaviours.operators[globalBehaviours[n]+1];
-		engine->globalBehaviours.operators[globalBehaviours[n]] = 0;
-		engine->globalBehaviours.operators[globalBehaviours[n]+1] = 0;
-	
-		// Remove the system function as well
-		engine->DeleteScriptFunction(id);
-	}
+	globalProps.SetLength(0);
 
 	// Remove global functions
 	for( n = 0; n < scriptFunctions.GetLength(); n++ )
 	{
-		engine->DeleteScriptFunction(scriptFunctions[n]->id);
+		int index = engine->registeredGlobalFuncs.GetIndex(scriptFunctions[n]);
+		if( index >= 0 )
+			engine->registeredGlobalFuncs.Erase(index);
+		scriptFunctions[n]->ReleaseInternal();
 	}
+	scriptFunctions.SetLength(0);
 
 	// Remove behaviours and members of object types
-	for( n = 0; n < objTypes.GetLength(); n++ )
+	for( n = 0; n < types.GetLength(); n++ )
 	{
-		asUINT m;
-		asCObjectType *obj = objTypes[n];
-
-		// Don't remove behaviours for interface types as they are built-in
-		if( !(obj->flags & asOBJ_SCRIPT_OBJECT) )
-		{
-			for( m = 0; m < obj->beh.factories.GetLength(); m++ )
-			{
-				engine->DeleteScriptFunction(obj->beh.factories[m]);
-			}
-
-			for( m = 0; m < obj->beh.constructors.GetLength(); m++ )
-			{
-				engine->DeleteScriptFunction(obj->beh.constructors[m]);
-			}
-
-			for( m = 1; m < obj->beh.operators.GetLength(); m += 2 )
-			{
-				engine->DeleteScriptFunction(obj->beh.operators[m]);
-			}
-
-			engine->DeleteScriptFunction(obj->beh.addref);
-			engine->DeleteScriptFunction(obj->beh.release);
-			engine->DeleteScriptFunction(obj->beh.addref);
-			engine->DeleteScriptFunction(obj->beh.gcGetRefCount);
-			engine->DeleteScriptFunction(obj->beh.gcSetFlag);
-			engine->DeleteScriptFunction(obj->beh.gcGetFlag);
-			engine->DeleteScriptFunction(obj->beh.gcEnumReferences);
-			engine->DeleteScriptFunction(obj->beh.gcReleaseAllReferences);
-		}
-
-		for( m = 0; m < obj->methods.GetLength(); m++ )
-		{
-			engine->DeleteScriptFunction(obj->methods[m]);
-		}
+		asCObjectType *obj = CastToObjectType(types[n]);
+		if( obj )
+			obj->ReleaseAllFunctions();
 	}
 
-
-	// Remove object types
-	for( n = 0; n < objTypes.GetLength(); n++ )
+	// Remove object types (skip this if it is possible other groups are still using the types)
+	if( !notUsed )
 	{
-		asCObjectType *t = objTypes[n];
-		int idx = engine->objectTypes.IndexOf(t);
-		if( idx >= 0 )
+		for( n = asUINT(types.GetLength()); n-- > 0; )
 		{
-#ifdef AS_DEBUG
-			ValidateNoUsage(engine, t);
-#endif
+			asCTypeInfo *t = types[n];
+			asSMapNode<asSNameSpaceNamePair, asCTypeInfo*> *cursor;
+			if( engine->allRegisteredTypes.MoveTo(&cursor, asSNameSpaceNamePair(t->nameSpace, t->name)) &&
+				cursor->value == t )
+			{
+				engine->allRegisteredTypes.Erase(cursor);
 
-			engine->objectTypes.RemoveIndex(idx);
+				if( engine->defaultArrayObjectType == t )
+					engine->defaultArrayObjectType = 0;
 
-			if( t->flags & asOBJ_TYPEDEF )
-				engine->registeredTypeDefs.RemoveValue(t);
-			else if( t->flags & asOBJ_ENUM )
-				engine->registeredEnums.RemoveValue(t);
+				if( t->flags & asOBJ_TYPEDEF )
+					engine->registeredTypeDefs.RemoveValue(CastToTypedefType(t));
+				else if( t->flags & asOBJ_ENUM )
+					engine->registeredEnums.RemoveValue(CastToEnumType(t));
+				else if (t->flags & asOBJ_TEMPLATE)
+					engine->registeredTemplateTypes.RemoveValue(CastToObjectType(t));
+				else if (t->flags & asOBJ_FUNCDEF)
+				{
+					engine->registeredFuncDefs.RemoveValue(CastToFuncdefType(t));
+					engine->RemoveFuncdef(CastToFuncdefType(t));
+				}
+				else
+					engine->registeredObjTypes.RemoveValue(CastToObjectType(t));
+
+				t->DestroyInternal();
+				t->ReleaseInternal();
+			}
 			else
-				engine->registeredObjTypes.RemoveValue(t);
-
-			asDELETE(t, asCObjectType);
+			{
+				int idx = engine->templateInstanceTypes.IndexOf(CastToObjectType(t));
+				if( idx >= 0 )
+				{
+					engine->templateInstanceTypes.RemoveIndexUnordered(idx);
+					asCObjectType *ot = CastToObjectType(t);
+					ot->DestroyInternal();
+					ot->ReleaseInternal();
+				}
+			}
 		}
+		types.SetLength(0);
 	}
 
 	// Release other config groups
 	for( n = 0; n < referencedConfigGroups.GetLength(); n++ )
 		referencedConfigGroups[n]->refCount--;
 	referencedConfigGroups.SetLength(0);
-}
-
-#ifdef AS_DEBUG
-void asCConfigGroup::ValidateNoUsage(asCScriptEngine *engine, asCObjectType *type)
-{
-	for( asUINT n = 0; n < engine->scriptFunctions.GetLength(); n++ )
-	{
-		asCScriptFunction *func = engine->scriptFunctions[n];
-		if( func == 0 ) continue;
-
-		asASSERT(func->returnType.GetObjectType() != type);
-
-		for( asUINT p = 0; p < func->parameterTypes.GetLength(); p++ )
-		{
-			asASSERT(func->parameterTypes[p].GetObjectType() != type);
-		}
-	}
-
-	// TODO: Check also usage of the type in global variables 
-
-	// TODO: Check also usage of the type in local variables in script functions
-
-	// TODO: Check also usage of the type as members of classes
-
-	// TODO: Check also usage of the type as sub types in other types
-}
-#endif
-
-int asCConfigGroup::SetModuleAccess(const char *module, bool hasAccess)
-{
-	if( module == asALL_MODULES )
-	{
-		// Set default module access
-		defaultAccess = hasAccess;
-	}
-	else
-	{
-		asCString mod(module ? module : "");
-		asSMapNode<asCString,bool> *cursor = 0;
-		if( moduleAccess.MoveTo(&cursor, mod) )
-		{
-			moduleAccess.GetValue(cursor) = hasAccess;
-		}
-		else
-		{
-			moduleAccess.Insert(mod, hasAccess);
-		}
-	}
-
-	return 0;
-}
-
-bool asCConfigGroup::HasModuleAccess(const char *module)
-{
-	asCString mod(module ? module : "");
-	asSMapNode<asCString,bool> *cursor = 0;
-	if( moduleAccess.MoveTo(&cursor, mod) )
-		return moduleAccess.GetValue(cursor);
-	
-	return defaultAccess;
 }
 
 END_AS_NAMESPACE

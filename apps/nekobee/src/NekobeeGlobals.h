@@ -45,7 +45,7 @@
 #include "Nekobee/nekobee_dssi.h"
 #include "Nekobee/gui_data.h"
 
-#include "src/extended/dependancies/dssi-1.0.0/dssi/dssi.h"
+#include "dssi.h"
 #include <alsa/asoundlib.h>
 
 //==============================================================================

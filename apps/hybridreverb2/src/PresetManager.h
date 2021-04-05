@@ -23,7 +23,7 @@
 #define __PRESETMANAGER_H__
 
 
-#include "juce_amalgamated.h"
+#include "juce.h"
 #include "ParamCategory.h"
 #include "ParamEnvelope.h"
 #include "ParamGainDelay.h"

@@ -1,11 +1,9 @@
 
 dofile ("../../../../tools/linux/premake.lua")
 
-package = make_plugin_project ("bitmangler", "exe", true, false)
+make_plugin_project ("bitmangler", "WindowedApp", true, false)
 
-package.files = {
-    matchrecursive (
-        "../../src/*.h",
-        "../../src/*.cpp"
-    )
+files {
+    "../../src/**.h",
+    "../../src/**.cpp"
 }

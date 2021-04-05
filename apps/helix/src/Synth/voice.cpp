@@ -141,8 +141,8 @@ VoiceSettings::VoiceSettings(Synth* s)
 
 
 VoiceInstance::VoiceInstance()
-:key(-1)
-,state(Unused)
+:state(Unused)
+,key(-1)
 {
 }
 

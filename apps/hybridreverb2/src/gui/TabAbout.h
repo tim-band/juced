@@ -23,7 +23,7 @@
 #define __JUCER_HEADER_TABABOUT_TABABOUT_34B27909__
 
 //[Headers]     -- You can add your own extra header files here --
-#include "juce_amalgamated.h"
+#include "juce.h"
 
 // forward declarations
 class MasterAndCommander;

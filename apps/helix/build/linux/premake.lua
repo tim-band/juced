@@ -1,13 +1,10 @@
 
 dofile ("../../../../tools/linux/premake.lua")
 
-package = make_plugin_project ("helix", "exe", true, false)
+make_plugin_project ("helix", "WindowedApp", true, false)
 
-package.files = {
-    matchrecursive (
-        "../../src/*.h",
-        "../../src/*.c",
-        "../../src/*.cpp"
-    )
+files {
+    "../../src/**.h",
+    "../../src/**.c",
+    "../../src/**.cpp"
 }
-

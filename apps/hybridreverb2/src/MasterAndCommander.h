@@ -23,7 +23,7 @@
 #define __MASTERANDCOMMANDER_H__
 
 
-#include "juce_amalgamated.h"
+#include "juce.h"
 #include "ParamGainDelay.h"
 #include "ParamEnvelope.h"
 #include "ParamTimbre.h"

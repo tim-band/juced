@@ -23,7 +23,7 @@
 #define __LAGRANGEINTERPOLATOR_H__
 
 
-#include "juce_amalgamated.h"
+#include "juce.h"
 
 
 #define C_2    0.5

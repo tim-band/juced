@@ -171,7 +171,8 @@ Part::~Part(){
     cleanup();
 
     for (int n=0;n<NUM_KIT_ITEMS;n++){
-        if (kit[n].adpars!=NULL) delete (kit[n].adpars); kit[n].adpars=NULL;
+        if (kit[n].adpars!=NULL) delete (kit[n].adpars);
+        kit[n].adpars=NULL;
     }
 
     delete[] partoutl;

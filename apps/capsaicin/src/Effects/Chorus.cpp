@@ -122,7 +122,7 @@ void Chorus::out (REALTYPE *smpsl, REALTYPE *smpsr, const int numSamples)
         //compute the delay in samples using linear interpolation between the lfo delays
         mdel = (dl1 * (numSamples - i) + dl2 * i) / numSamples;
 
-        dlk = (++dlk) % maxdelay; // @XXX - new code
+        dlk = (dlk + 1) % maxdelay; // @XXX - new code
 //        if (++dlk >= maxdelay) dlk = 0;
 
         REALTYPE tmp = dlk - mdel + maxdelay * 2.0; //where should I get the sample from
@@ -140,7 +140,7 @@ void Chorus::out (REALTYPE *smpsl, REALTYPE *smpsr, const int numSamples)
         //compute the delay in samples using linear interpolation between the lfo delays
         mdel = (dr1 * (numSamples - i) + dr2 * i) / numSamples;
 
-        drk = (++drk) % maxdelay; // @XXX - new code
+        drk = (drk + 1) % maxdelay; // @XXX - new code
 //        if (++drk >= maxdelay) drk = 0;
 
         tmp = drk - mdel + maxdelay * 2.0; //where should I get the sample from
