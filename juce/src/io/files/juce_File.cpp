@@ -173,7 +173,8 @@ static const String parseAbsolutePath (String path)
         if (path.isEmpty())
             return String::empty;
 
-        jassertfalse // using a partial filename is a bad way to initialise a file, because
+        // what does all this mean? TPB
+        //jassertfalse // using a partial filename is a bad way to initialise a file, because
                      // we don't know what directory to put it in.
                      // Here we'll assume it's in the CWD, but this might not be what was
                      // intended..

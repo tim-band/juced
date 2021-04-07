@@ -172,7 +172,8 @@ protected:
     
     void cleanConnections ();
     void cleanNodes ();
-    //==============================================================================
+
+    //==============================================================================
     JackedWindow* parentWindow;
     
     OwnedArray<JackedDevice> inputNodes, outputNodes;

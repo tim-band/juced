@@ -73,6 +73,7 @@
 #include <X11/Xutil.h>
 #include <X11/Xmd.h>
 #include <X11/keysym.h>
+#include <X11/XKBlib.h>
 #include <X11/cursorfont.h>
 
 #if JUCE_USE_XINERAMA

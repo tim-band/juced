@@ -87,6 +87,7 @@
 #include <string>
 #include <list>
 #include <set>
+#include <atomic>
 
 #if JUCE_USE_INTRINSICS
   #include <intrin.h>

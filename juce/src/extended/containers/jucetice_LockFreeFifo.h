@@ -64,12 +64,13 @@ public:
 
     //==============================================================================
     /** Constructor */
-    LockFreeFifo (int32 bufferSize_)
+    LockFreeFifo (int32 bufferSize)
         : readIndex (0),
           writeIndex (0),
-          bufferSize (bufferSize_),
+          bufferMax (bufferSize - 1),
           buffer (0)
     {
+        jassert((bufferMax & bufferSize) == 0); // bufferSize must be a power of 2
         buffer = new ElementType [bufferSize];
     }
 
@@ -84,16 +85,12 @@ public:
     */
     ElementType get ()
     {
-        if (readIndex == writeIndex)
+        if ((readIndex ^ writeIndex) & bufferMax == 0)
         {
             return (ElementType) 0;
         }
 
-        ElementType data = buffer [readIndex];
-
-        readIndex = (readIndex + 1) % bufferSize;
-
-        return data;
+        return buffer[readIndex++ & bufferMax];
     }
 
     //==============================================================================
@@ -102,16 +99,7 @@ public:
     */
     void put (ElementType data)
     {
-        int32 newIndex = (writeIndex + 1) % bufferSize;
-
-        if (newIndex == readIndex)
-        {
-            return;
-        }
-
-        buffer [writeIndex] = data;
-
-        writeIndex = newIndex;
+        buffer [++writeIndex & bufferMax] = data;
     }
 
     //==============================================================================
@@ -128,14 +116,14 @@ public:
     */
     bool isFull () const 
     {
-        return ((writeIndex + 1) % bufferSize) == readIndex;   
+        return (((writeIndex + 1) ^ readIndex) & bufferMax) == 0;
     }
 
 private:
 
-    volatile int32 readIndex, writeIndex, bufferSize;
+    volatile std::atomic_int32_t readIndex, writeIndex;
+    int32 bufferMax;
     ElementType* buffer;
 };
 
 #endif
-

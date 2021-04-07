@@ -1316,8 +1316,8 @@ public:
                 int keyCode = (int) unicodeChar;
 
                 if (keyCode < 0x20)
-                    keyCode = XKeycodeToKeysym (display, keyEvent->keycode,
-                                                (currentModifiers & ModifierKeys::shiftModifier) != 0 ? 1 : 0);
+                    keyCode = XkbKeycodeToKeysym(display, keyEvent->keycode, 0,
+                        currentModifiers & ModifierKeys::shiftModifier? 1 : 0);
 
                 const int oldMods = currentModifiers;
                 bool keyPressed = false;
@@ -1414,7 +1414,8 @@ public:
                 const XKeyEvent* const keyEvent = (const XKeyEvent*) &event->xkey;
                 updateKeyStates (keyEvent->keycode, false);
 
-                KeySym sym = XKeycodeToKeysym (display, keyEvent->keycode, 0);
+                KeySym sym = XkbKeycodeToKeysym(display, keyEvent->keycode, 0,
+                    currentModifiers & ModifierKeys::shiftModifier? 1 : 0);
 
                 const int oldMods = currentModifiers;
                 const bool keyDownChange = (sym != NoSymbol) && ! updateKeyModifiersFromSym (sym, false);

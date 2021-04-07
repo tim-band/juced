@@ -225,11 +225,10 @@ function configure_standard_options (link_with_libraries)
     end
 
     configuration { "gmake*", "not disable-jack", "not SharedLib" }
-    if (os.isfile ("/usr/include/jack/jack.h")
-        and os.findlib ("jack")) then
+    if (os.findlib ("jack")) then
         defines { "JUCE_JACK=1" }
         if link_with_libraries then
-            --links { "jack" }
+            links { "jack" }
         end
     end
 
