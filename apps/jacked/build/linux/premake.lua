@@ -1,7 +1,4 @@
-
-dofile ("../../../../tools/linux/premake.lua")
-
-make_plugin_project ("jacked", "WindowedApp", true, false)
+make_plugin_project ("jacked", "WindowedApp", false)
 
 includedirs { "../../src" }
 links { "jack" }

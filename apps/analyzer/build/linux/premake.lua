@@ -1,7 +1,5 @@
 
-dofile ("../../../../tools/linux/premake.lua")
-
-make_plugin_project ("analyzer", "WindowedApp", true, false)
+make_plugin_project ("analyzer", "WindowedApp", false)
 
 files {
     "../../src/**.h",

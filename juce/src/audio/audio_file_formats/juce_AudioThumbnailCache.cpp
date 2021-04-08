@@ -110,7 +110,7 @@ void AudioThumbnailCache::storeThumb (const AudioThumbnail& thumb,
                 if (thumbs[i]->lastUsed < oldestTime)
                     oldest = i;
 
-            thumbs.set (i, te);
+            thumbs.set (oldest, te);
         }
     }
 

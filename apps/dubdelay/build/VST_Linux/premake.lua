@@ -1,7 +1,4 @@
-
-dofile ("../../../../tools/linux/premake.lua")
-
-make_plugin_project ("dubdelay", "SharedLib", true, false)
+make_plugin_project ("dubdelay", "SharedLib", false)
 
 defines { "XDUBDELAY_VST_PLUGIN=1" }
 

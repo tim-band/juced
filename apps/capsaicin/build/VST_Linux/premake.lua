@@ -1,7 +1,5 @@
 
-dofile ("../../../../tools/linux/premake.lua")
-
-make_plugin_project ("capsaicinvst", "SharedLib", true, false)
+make_plugin_project ("capsaicinvst", "SharedLib", false)
 
 defines { "XSYNTH_VST_PLUGIN=1" }
 

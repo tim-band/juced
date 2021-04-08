@@ -1,7 +1,4 @@
-
-dofile ("../../../../tools/linux/premake.lua")
-
-make_plugin_project ("tal-filter", "WindowedApp", true, false)
+make_plugin_project ("tal-filter", "WindowedApp", false)
 
 includedirs { "../../src" }
 

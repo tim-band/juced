@@ -1,7 +1,4 @@
-
-dofile ("../../../../tools/linux/premake.lua")
-
-make_plugin_project ("drumsynthvst", "SharedLib", true, false)
+make_plugin_project ("drumsynthvst", "SharedLib", false)
 
 defines { "XDRUMSYNTH_VST_PLUGIN=1" }
 

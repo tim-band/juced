@@ -36,7 +36,11 @@
  #include "../../juce/juce.h"
 #endif
 
+#include <cpptest.h>
+
+#if JUCE_SUPPORT_SCRIPTING
 #include "test_suites/ScriptingTestSuite.h"
+#endif
 #include "test_suites/CompareTestSuite.h"
 #include "test_suites/ThrowTestSuite.h"
 
@@ -102,9 +106,11 @@ int main (int argc, char* argv[])
 		// Demonstrates the ability to use multiple test suites
 		//
 		Test::Suite ts;
-		ts.add (new ScriptingTestSuite);
-		ts.add (new CompareTestSuite);
-		ts.add (new ThrowTestSuite);
+#if JUCE_SUPPORT_SCRIPTING
+		ts.add (std::unique_ptr<Test::Suite>(new ScriptingTestSuite));
+#endif
+		ts.add (std::unique_ptr<Test::Suite>(new CompareTestSuite));
+		ts.add (std::unique_ptr<Test::Suite>(new ThrowTestSuite));
 
 		// Run the tests
 		//

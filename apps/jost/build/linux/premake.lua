@@ -1,7 +1,4 @@
-
-dofile ("../../../../tools/linux/premake.lua")
-
-make_plugin_project ("jost", "WindowedApp", true, false)
+make_plugin_project ("jost", "WindowedApp", false)
 configure_jost_libraries (true)
 
 files {

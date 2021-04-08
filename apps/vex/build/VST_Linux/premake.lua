@@ -1,7 +1,4 @@
-
-dofile ("../../../../tools/linux/premake.lua")
-
-make_plugin_project ("vexvst", "SharedLib", true, false)
+make_plugin_project ("vexvst", "SharedLib", false)
 
 defines { "XVEX_VST_PLUGIN=1" }
 

@@ -1,7 +1,4 @@
-
-dofile ("../../../../tools/linux/premake.lua")
-
-make_plugin_project ("monitor", "SharedLib", true, false)
+make_plugin_project ("monitor", "SharedLib", false)
 
 files {
     "../../../../wrapper/*.h",

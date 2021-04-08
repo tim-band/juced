@@ -1,7 +1,4 @@
-
-dofile ("../../../../tools/linux/premake.lua")
-
-make_plugin_project ("implzr", "WindowedApp", true, false)
+make_plugin_project ("implzr", "WindowedApp", false)
 
 defines { "LIBFV3_FLOAT=1", "LIBSRATE2_FLOAT=1" }
 links { "fftw3f" }

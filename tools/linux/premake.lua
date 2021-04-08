@@ -8,28 +8,26 @@ function make_library_project (name)
 
     solution "juced"
     project (name)
+    location "."
     configuration {}
     kind "StaticLib"
     links { "dl", "lo", "sndfile", "libcpptest", "samplerate" }
     -- also install: dssi-dev
 
-    generic_configuration(name, false, "../../../bin/")
+    generic_configuration(name, false)
     configure_standard_options (false)
     configuration {}
     buildoptions { "`pkg-config --cflags Qt5Widgets`" }
     linkoptions { "`pkg-config --libs Qt5Widgets`" }
 end
 
-function generic_configuration(name, libdir, basedir)
+function generic_configuration(name, basedir)
 
     configuration {}
-        language "c++"
-        if (not libdir) then
-            libdir = basedir
+        if not basedir then
+            basedir = "../../../bin/"
         end
-        libdirs { libdir }
-
-        configurations({ "Debug", "Release", "Release32" })
+        language "c++"
 
         targetname (name)
         objdir (basedir .. "intermediate/" .. name)
@@ -77,17 +75,18 @@ function generic_configuration(name, libdir, basedir)
     end
 
 --======================================================================================
-function make_plugin_project (name, kind_, __, libpath) 
+function make_plugin_project (name, kind_, libpath) 
 
     print ("==== Configuring " .. name .. " ====")
     print ("Configuring GNU makefiles:")
 
     solution "juced"
     project (name)
+    location "."
     targetname (name)
     kind (kind_)
     
-    generic_configuration(name, libpath, "../../../../bin/")
+    generic_configuration(name, libpath)
     configure_standard_options (true)
     configuration {}
 end
@@ -101,7 +100,7 @@ function configure_standard_options (link_with_libraries)
         trigger = "vstsdk-version",
         description = "Specify version of VSTSDK (default 2.4)",
         value = "VERSION",
-        allowed = { "2.3", "2.4" },
+        allowed = { { "2.3", "VST SDK version 2.3" }, { "2.4", "VST SDK version 2.4" } },
         default = "2.4"
     }
     configure_vst_sdk ()
@@ -139,6 +138,10 @@ function configure_standard_options (link_with_libraries)
     --filter { "action:gmake*" }
     configuration"gmake*"
 
+    newoption {
+        trigger = "enable-scripting",
+        description = "Disable scripting support (doesn't work)"
+    }
     newoption {
         trigger = "disable-alsa",
         description = "Disable ALSA support (this will disable also midi)"
@@ -178,6 +181,9 @@ function configure_standard_options (link_with_libraries)
     links { "rt", "dl", "m", "pthread", "freetype", "X11", "Xext" }
 
     -- configure step for libraries ---------------------------------------
+    configuration { "enable-scripting" }
+        defines { "JUCE_SUPPORT_SCRIPTING=1" }
+ 
     configuration { "gmake*", "not disable-xshm" }
     if (os.isfile ("/usr/include/X11/extensions/XShm.h")) then
         defines { "JUCE_USE_XSHM=1" }
@@ -309,12 +315,6 @@ function configure_vst_sdk ()
         includedirs {
             "../../../../vst/vstsdk2.3",
             "../../../../vst/vstsdk2.3/source/common",
-            "../../../../vstsdk2.3",
-            "../../../../vstsdk2.3/source/common",
-            "../../vst/vstsdk2.3",
-            "../../vst/vstsdk2.3/source/common",
-            "../../vstsdk2.3",
-            "../../vstsdk2.3/source/common"
         }
         --filter { "system:linux" }
         configuration { "vstsdk-version=2.3", "linux" }
@@ -324,12 +324,6 @@ function configure_vst_sdk ()
         includedirs {
             "../../../../vst/vstsdk2.4",
             "../../../../vst/vstsdk2.4/public.sdk/source/vst2.x",
-            "../../../../vstsdk2.4",
-            "../../../../vstsdk2.4/public.sdk/source/vst2.x",
-            "../../vst/vstsdk2.4",
-            "../../vst/vstsdk2.4/public.sdk/source/vst2.x",
-            "../../vstsdk2.4",
-            "../../vstsdk2.4/public.sdk/source/vst2.x"
         }
         --filter { "system:linux" }
         configuration { "not vstsdk-version=2.3", "linux" }

@@ -1,6 +1,4 @@
-dofile ("../../../../tools/linux/premake.lua")
-
-make_plugin_project ("HybridReverb2vst", "SharedLib", true, false)
+make_plugin_project ("HybridReverb2vst", "SharedLib", false)
 
 defines { "HYBRIDREVERB2_VST_PLUGIN" }
 

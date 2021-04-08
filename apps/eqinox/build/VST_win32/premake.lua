@@ -1,7 +1,5 @@
+make_plugin_project ("eqinoxvst", "SharedLib", false)
 
-dofile ("../../../../tools/linux/premake.lua")
-
-make_plugin_project ("eqinoxvst", "SharedLib", true, false)
 defines { "XEQ_VST_PLUGIN=1" }
 
 files {

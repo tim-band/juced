@@ -50,7 +50,7 @@ FileChooser::FileChooser (const String& chooserBoxTitle,
 {
 #if JUCE_LINUX
     const char* command = "zenity --help";
-    if (execlp (command, NULL, NULL) != 0)
+    if (execlp (command, command, NULL) != 0)
         useNativeDialogBox = false;
 #endif
 

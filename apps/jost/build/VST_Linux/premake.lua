@@ -1,7 +1,4 @@
-
-dofile ("../../../../tools/linux/premake.lua")
-
-make_plugin_project ("jostvst", "SharedLib", true, false)
+make_plugin_project ("jostvst", "SharedLib", false)
 configure_jost_libraries (false)
 
 files {

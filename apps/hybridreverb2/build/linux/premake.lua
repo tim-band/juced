@@ -1,7 +1,4 @@
-
-dofile ("../../../../tools/linux/premake.lua")
-
-make_plugin_project ("HybridReverb2", "WindowedApp", true, false)
+make_plugin_project ("HybridReverb2", "WindowedApp", false)
 
 includedirs { 
     "/usr/include",

@@ -1,7 +1,4 @@
-
-dofile ("../../../../tools/linux/premake.lua")
-
-make_plugin_project ("analyzervst", "SharedLib", true, false)
+make_plugin_project ("analyzervst", "SharedLib", false)
 
 defines { "XANALYZER_VST_PLUGIN=1" }
 

@@ -1,7 +1,4 @@
-
-dofile ("../../../../tools/linux/premake.lua")
-
-make_plugin_project ("tal-filtervst", "SharedLib", true, false)
+make_plugin_project ("tal-filtervst", "SharedLib", false)
 
 includedirs { "../../src" }
 

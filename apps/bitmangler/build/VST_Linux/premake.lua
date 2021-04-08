@@ -1,7 +1,4 @@
-
-dofile ("../../../../tools/linux/premake.lua")
-
-package = make_plugin_project ("bitmanglervst", "SharedLib", true, false)
+make_plugin_project ("bitmanglervst", "SharedLib", false)
 
 defines { "XBITMANGLER_VST_PLUGIN=1" }
 

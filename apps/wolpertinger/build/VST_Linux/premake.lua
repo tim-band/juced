@@ -1,7 +1,4 @@
-
-dofile ("../../../../tools/linux/premake.lua")
-
-make_plugin_project ("wolpertingervst", "SharedLib", true, false)
+make_plugin_project ("wolpertingervst", "SharedLib", false)
 
 defines { "XWOLPERTINGER_VST_PLUGIN=1" }
 

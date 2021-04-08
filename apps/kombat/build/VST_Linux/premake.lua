@@ -1,7 +1,4 @@
-
-dofile ("../../../../tools/linux/premake.lua")
-
-make_plugin_project ("kombat", "SharedLib", true, false)
+make_plugin_project ("kombat", "SharedLib", false)
 
 includedirs { "../../src" }
 

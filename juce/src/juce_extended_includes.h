@@ -237,10 +237,6 @@
  #include "extended/lookandfeel/jucetice_JuceticeLookAndFeel.h"
 #endif
 
-#ifndef __JUCETICE_NET_HEADER__
- #include "extended/network/jucetice_Net.h"
-#endif
-
 #ifndef __JUCETICE_SCRIPTABLEENGINE_HEADER__
  #include "extended/scripting/jucetice_ScriptableEngine.h"
 #endif

@@ -1,7 +1,4 @@
-
-dofile ("../../../../tools/linux/premake.lua")
-
-make_plugin_project ("wolpertinger", "WindowedApp", true, false)
+make_plugin_project ("wolpertinger", "WindowedApp", false)
 
 files {
     "../../src/**.h",

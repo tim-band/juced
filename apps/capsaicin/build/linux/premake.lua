@@ -1,7 +1,4 @@
-
-dofile ("../../../../tools/linux/premake.lua")
-
-make_plugin_project ("capsaicin", "WindowedApp", true, false)
+make_plugin_project ("capsaicin", "WindowedApp", false)
 
 files {
     "../../src/**.h",

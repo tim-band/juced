@@ -1,12 +1,8 @@
+make_plugin_project ("unit_testing", "ConsoleApp", "../../../bin/")
 
-dofile ("../../../tools/linux/premake.lua")
-
-package = make_plugin_project ("unit_testing", "exe", true, false, "../../../bin")
-
-package.files = {
-    matchrecursive (
-        "../../src/*.h",
-        "../../src/*.cpp"
-    )
+files {
+    "../../src/**.h",
+    "../../src/**.cpp"
 }
 
+links { "cpptest" }

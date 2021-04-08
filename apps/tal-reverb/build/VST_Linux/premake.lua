@@ -1,7 +1,4 @@
-
-dofile ("../../../../tools/linux/premake.lua")
-
-make_plugin_project ("tal-reverbvst", "SharedLib", true, false)
+make_plugin_project ("tal-reverbvst", "SharedLib", false)
 
 defines { "XTALREVERB_VST_PLUGIN=1" }
 

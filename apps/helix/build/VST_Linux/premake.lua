@@ -1,7 +1,4 @@
-
-dofile ("../../../../tools/linux/premake.lua")
-
-make_plugin_project ("helixvst", "SharedLib", true, false)
+make_plugin_project ("helixvst", "SharedLib", false)
 
 defines { "HELIX_VST_PLUGIN=1" }
 

@@ -1,7 +1,4 @@
-
-dofile ("../../../../tools/linux/premake.lua")
-
-make_plugin_project ("soundcrab", "WindowedApp", true, false)
+make_plugin_project ("soundcrab", "WindowedApp", false)
 
 includedirs { "../../src", "../../src/Synth" }
 

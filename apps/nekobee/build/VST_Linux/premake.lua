@@ -1,7 +1,4 @@
-
-dofile ("../../../../tools/linux/premake.lua")
-
-make_plugin_project ("nekobeevst", "SharedLib", true, false)
+make_plugin_project ("nekobeevst", "SharedLib", false)
 
 defines { "XNEKOBEE_VST_PLUGIN=1" }
 
