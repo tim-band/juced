@@ -32,6 +32,7 @@ BEGIN_JUCE_NAMESPACE
 
 //==============================================================================
 Message::Message() throw()
+  : intParameter1(0), intParameter2(0), intParameter3(0), pointerParameter(0)
 {
 }
 

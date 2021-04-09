@@ -64,7 +64,7 @@ Run them from the `bin/linux` directory.
 | jost | VST host | Yes! | N/A |
 | kombat | | N/A? | |
 | monitor | | N/A? | |
-| nekobee | Simple subtractive synth | segfaults | |
+| nekobee | Simple subtractive synth | Works, but segfaults if config file is already present | |
 | notemap | | N/A? | |
 | peggy2000 | Some sort of synth | Maybe... needs a huge screen, can't work it out | |
 | soundcrab | Soundfont player | | |

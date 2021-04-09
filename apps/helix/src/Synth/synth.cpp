@@ -10,10 +10,7 @@
 
 // #include <windows.h>
 
-
 ////////////////////////////////////////////////////////////////////////
-
-
 
 // JUST TUNING
 #include <vector>
@@ -21,6 +18,53 @@
 #include <math.h>
 
 #include <stdio.h>
+
+// IMPORTANT!!! make sure this names corresponds to mod sources
+static const char* mod_src_names[MOD_VOICE_SOURCES + MOD_SYNTH_SOURCES] = 
+{
+	"EG0", 
+	"EG1", 
+	"EG2", 
+	"LFO0",
+	"LFO1",
+	"SEQ0",
+	"KBD0",
+	"EG100", 
+	"LFO100",
+	"SEQ100",
+	"CC100"
+};
+
+static const char* mod_dst_names[MOD_VOICE_DESTINATIONS] = 
+{
+	"O0-AMP", 
+	"O0-PAN", 
+	"O0-HARM", 
+	"O0-MORPH", 
+	"O0-PITCH", 
+	"O0-SPREAD", 
+	"O1-AMP", 
+	"O1-PAN", 
+	"O1-HARM", 
+	"O1-MORPH", 
+	"O1-PITCH", 
+	"O1-SPREAD", 
+	"O2-AMP", 
+	"O2-PAN", 
+	"O2-HARM", 
+	"O2-MORPH", 
+	"O2-PITCH", 
+	"O2-SPREAD", 
+	"O3-AMP", 
+	"O3-PAN", 
+	"O3-HARM", 
+	"O3-MORPH", 
+	"O3-PITCH", 
+	"O3-SPREAD", 
+	"F0-FREQ", 
+	"F1-FREQ",
+	"F2-FREQ"
+};
 
 double f2o( double freqRatio )
 {
@@ -215,18 +259,8 @@ void Synth::FillParams()
     }
     params->AddLayoutDirective( Params::LAYOUT_GROUP_END, ""  );
 
-
-
-
-
-
-
     // space btw. osc anf filters...
     params->AddLayoutDirective( Params::LAYOUT_MAKE_SPACE, tmp, 16, 16 );
-
-
-
-
 
     params->AddLayoutDirective( Params::LAYOUT_HGROUP_BEGIN, ""  );
 
@@ -338,12 +372,6 @@ void Synth::FillParams()
     params->AddLayoutDirective( Params::LAYOUT_GROUP_END, "" );
     // all src names
 
-
-
-
-
-
-
     // modmatrix
 	float* mixp_v = voices.modmatrix_voice;
 	float* mixp_s = voices.modmatrix_synth;
@@ -382,14 +410,6 @@ void Synth::FillParams()
 
     params->AddLayoutDirective( Params::LAYOUT_GROUP_END, "" );
 
-
-
-
-
-
-
-
-
     // config
     params->AddLayoutDirective( Params::LAYOUT_LABEL, "CONFIG", 128, 13 );
 
@@ -405,11 +425,7 @@ void Synth::FillParams()
 	params->data.back().SetEnums( "POLY|LEGATO|MONO" );
     // config
 
-
 // GLOBAL !!!
-
-
-
 
     for (int i = 0 ; i != CC_PER_SYNTH ; ++i )
         midiccs[i].fillParams( 100 + i , params );
@@ -430,9 +446,6 @@ void Synth::FillParams()
 
 }
 
-
-
-
 Synth::Synth()
 : voiceCount(0)
 , voices(this)
@@ -446,12 +459,10 @@ Synth::Synth()
 
     vuMeter = 0.f;
 
-
 	//	filteri.noteOn();
 	delayi.reset( this, &delays );
 	reverbi.reset( this, &reverbs );
 //	dynamicsi.reset( this, &dynamicss );
-
 
     for (int i = 0 ; i != EG_PER_SYNTH ; ++i )
         egi[i].noteOn( .5f, .5f, egs + i, this, true );

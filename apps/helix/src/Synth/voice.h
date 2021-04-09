@@ -54,53 +54,6 @@ static const int CC_PER_SYNTH = 1;
 
 const int MOD_SYNTH_SOURCES = EG_PER_SYNTH + LFO_PER_SYNTH + SEQ_PER_SYNTH + CC_PER_SYNTH;
 
-// IMPORTANT!!! make sure this names corresponds to mod sources
-static const char* mod_src_names[MOD_VOICE_SOURCES + MOD_SYNTH_SOURCES] = 
-{
-	"EG0", 
-	"EG1", 
-	"EG2", 
-	"LFO0",
-	"LFO1",
-	"SEQ0",
-	"KBD0",
-	"EG100", 
-	"LFO100",
-	"SEQ100",
-	"CC100"
-};
-
-static const char* mod_dst_names[MOD_VOICE_DESTINATIONS] = 
-{
-	"O0-AMP", 
-	"O0-PAN", 
-	"O0-HARM", 
-	"O0-MORPH", 
-	"O0-PITCH", 
-	"O0-SPREAD", 
-	"O1-AMP", 
-	"O1-PAN", 
-	"O1-HARM", 
-	"O1-MORPH", 
-	"O1-PITCH", 
-	"O1-SPREAD", 
-	"O2-AMP", 
-	"O2-PAN", 
-	"O2-HARM", 
-	"O2-MORPH", 
-	"O2-PITCH", 
-	"O2-SPREAD", 
-	"O3-AMP", 
-	"O3-PAN", 
-	"O3-HARM", 
-	"O3-MORPH", 
-	"O3-PITCH", 
-	"O3-SPREAD", 
-	"F0-FREQ", 
-	"F1-FREQ",
-	"F2-FREQ"
-};
-
 class Params;
 
 const int CBUFS = 64; // contol-buf

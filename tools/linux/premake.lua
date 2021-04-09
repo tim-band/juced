@@ -14,7 +14,7 @@ function make_library_project (name)
     links { "dl", "lo", "sndfile", "libcpptest", "samplerate" }
     -- also install: dssi-dev
 
-    generic_configuration(name, false)
+    generic_configuration(name, '../../../bin/')
     configure_standard_options (false)
     configuration {}
     buildoptions { "`pkg-config --cflags Qt5Widgets`" }
@@ -25,7 +25,7 @@ function generic_configuration(name, basedir)
 
     configuration {}
         if not basedir then
-            basedir = "../../../bin/"
+            basedir = "../../../../bin/"
         end
         language "c++"
 

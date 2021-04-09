@@ -361,7 +361,7 @@ bool MemoryBlock::fromBase64Encoding (const String& s) throw()
     if (startPos <= 0)
         return false;
 
-    const int numBytesNeeded = s.substring (0, startPos - 1).getIntValue();
+    const int numBytesNeeded = s.substring (0, startPos - 1).getIntValue() * sizeof(tchar);
 
     setSize (numBytesNeeded, true);
 

@@ -32,20 +32,15 @@ MidiPadsPluginEditor::MidiPadsPluginEditor (MidiPadsPlugin* owner_)
 
     setMouseClickGrabsKeyboardFocus (false);
 
-    bool useaft = false;
-    if (owner->getParameter(kSendAft)>=0.5) useaft=true;
-
     showdots = true;
     dontsend = false;
 
     bool usex[numPads];
-    bool usey[numPads];
      
     for (int i = 0; i < numPads; i++)
     {
         toggled[i] = false;
         usex[i] = owner->UseX[i] >= 0.5;
-        usey[i] = owner->UseY[i] >= 0.5;
 
         addAndMakeVisible (midiPad[i] = new MidiPad());
         midiPad[i]->setName(String(i));
@@ -131,7 +126,7 @@ MidiPadsPluginEditor::MidiPadsPluginEditor (MidiPadsPlugin* owner_)
 
         lastx[i]=0;
         lasty[i]=0;
-     }
+    }
 
     addAndMakeVisible (slider = new Slider (T("new slider")));
     slider->setTooltip (T("Hue"));
@@ -910,8 +905,8 @@ void MidiPadsPluginEditor::buttonClicked (Button* buttonThatWasClicked)
         if (owner->editmode) editmode=true;
         bool usemouseup = false;
         if (owner->usemouseup) usemouseup=true;
-        bool noteontrig = false;
-        if (owner->getParameter(kNoteOnTrig)>=0.5f) noteontrig=true;
+        //bool noteontrig = false;
+        //if (owner->getParameter(kNoteOnTrig)>=0.5f) noteontrig=true;
 
         PopupMenu m;
         m.addItem (1, String(T("Send off value")), true, sendoffvalue);

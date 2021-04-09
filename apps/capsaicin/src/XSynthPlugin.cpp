@@ -127,7 +127,10 @@ void XSynthPlugin::processBlock (AudioSampleBuffer& buffer,
         }
     }
 
-    master.GetAudioOutSamples (blockSamples, (int) getSampleRate(), outl, outr);
+    int sampleRate = static_cast<int>( getSampleRate() );
+    if (sampleRate != 0) {
+        master.GetAudioOutSamples (blockSamples, sampleRate, outl, outr);
+    }
 
     // unlock master
     master.mutex.exit ();

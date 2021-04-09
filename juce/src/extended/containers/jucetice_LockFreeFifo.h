@@ -85,7 +85,7 @@ public:
     */
     ElementType get ()
     {
-        if (((readIndex ^ writeIndex) & bufferMax)== 0)
+        if (((readIndex ^ writeIndex) & bufferMax) == 0)
         {
             return (ElementType) 0;
         }
@@ -99,7 +99,7 @@ public:
     */
     void put (ElementType data)
     {
-        buffer [++writeIndex & bufferMax] = data;
+        buffer [writeIndex++ & bufferMax] = data;
     }
 
     //==============================================================================
