@@ -53,25 +53,25 @@ Run them from the `bin/linux` directory.
 
 | app | description | working? | VST working in Jost? | VST working in Reaper? |
 | :-- | :-- | :-- | :-- | :-- |
-| analyzer | | | | |
+| analyzer | Looks like a spectrum analyzer | Runs, but no signal displayed | Not recognized as VST | |
 | bitmangler | lo-fi distortion | Yes | | segfaults |
 | capsaicin | | Segfaults | | |
 | drumsynth | Drum Synthesizer | Memory allocation failure | | |
-| dubdelay | | Segfaults | | |
+| dubdelay | What sort of plugin? | | | |
 | eqinox | 6-band parametric equalizer | Yes | segfaults | segfaults |
 | helix | | crashes | | |
 | hybridreverb2 | Reverb | Runs, but what are these files it wants? | | |
 | implzr | Impulse reverb | Runs, but needs an impulse file. What format? | | |
 | jacked | | Runs, but just a blank screen | | |
 | jost | VST host | Yes! | N/A | N/A |
-| kombat | | N/A? | | |
-| monitor | | N/A? | | |
+| kombat | No idea | N/A? | N/A? Doesn't recognize it as a plugin | N/A |
+| monitor | Probably a monitor? But what sort of plugin | N/A? | N/A? | N/A |
 | nekobee | Simple monosynth | Yes | segfaults | segfaults during scanning! |
-| notemap | | N/A? | | |
+| notemap | What sort of plugin? | N/A? | N/A? | N/A |
 | peggy2000 | Some sort of synth | Maybe... needs a huge screen, can't work it out | | |
 | soundcrab | Soundfont player | | | |
 | tal-filter | | runs, but sounds terrible | runs, sounds terrible | fails to scan |
 | tal-reverb | Reverb | Yes | | |
 | vex | | Crashes | | |
-| wolpertinger | Synth | | | |
+| wolpertinger | Weird noise making synth | Yes | Yes | |
 | unit_testing | Tests | No | N/A | N/A |
