@@ -39,20 +39,18 @@ private:
 public:
 	FilterHandler *filterHandlerL;
 	FilterHandler *filterHandlerR;
-	float *param;
+	Params param;
 	Lfo *lfoL;
 	Lfo *lfoR;
 
-	Envelope *envelope;
+	Envelope envelope;
 
 	float volume, inputDrive, envelopeAmount, lfoAmount;
 
 	ParamChangeUtil* cutoffParamChange;
 
-	Engine(float sampleRate) 
+	Engine(float sampleRate)
 	{
-		Params *params= new Params();
-		this->param= params->parameters;
 		initialize(sampleRate);
 		bpm = 120.0f;
 		volume = 0.8f;
@@ -63,7 +61,6 @@ public:
 	{
 		delete filterHandlerL;
 		delete filterHandlerR;
-		delete envelope;
 
 		delete lfoL;
 		delete lfoR;
@@ -125,7 +122,7 @@ public:
 		cutoffParamChange = new ParamChangeUtil(sampleRate, 1000.0f);
 		lfoL = new Lfo(sampleRate);
 		lfoR = new Lfo(sampleRate);
-		envelope = new Envelope(sampleRate);
+		envelope.setSampleRate(sampleRate);
 	}
 
 	float getLfoInc()
@@ -184,7 +181,7 @@ public:
 
 		// add envelope
 		float envelopeInput = 0.5f * (*sampleL + *sampleR);
-		cutoff += envelope->tick(envelopeInput, envelopeAmount, param[ENVELOPESPEED] * param[ENVELOPESPEED]);
+		cutoff += envelope.tick(envelopeInput, envelopeAmount, param[ENVELOPESPEED] * param[ENVELOPESPEED]);
 
 		// add lfo
 		float cutoffModulationL = lfoL->tick(param[LFOWAVEFORM] - 1) * lfoAmount;

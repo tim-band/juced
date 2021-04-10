@@ -33,24 +33,30 @@ class Envelope
 private:
 	float currentValue;
 	float paramWeight;
-	float paramWeigthInverse;
 
 public:
-	Envelope(float sampleRate)
+	Envelope() : currentValue(0.0), paramWeight(0.0)
 	{
-		currentValue = 0;
-		paramWeight = 100.0f;
-		this->paramWeight = paramWeight * sampleRate / 44100.0f;
+	}
+
+	void setSampleRate(float sampleRate) {
+		paramWeight = M_PI / sampleRate;
 	}
 
 	// speed [0,1] --> 1 = fast, 0 = slow
 	// input [-1,1]
-	inline float tick(float input, float amount, float speed)
+	// single pole lowpass recurrance: ynew = yold + a*x
+	// for small w, a = w/2. w = 2pi*f/samplerate so a = pi*f/samplerate
+	// t = 1/f (right? maybe there's a pi in there)
+	// => a = (pi / samplerate) / t
+	float tick(float input, float amount, float speed)
 	{
+		static const float slowest = 0.05;
+		static const float fastest = 0.5;
+		float t = slowest + (fastest - slowest) * speed;
 		input = fabs(input);
 		if (input > 1.0f) input = 1.0f;
-		speed = paramWeight + speed * 100.0f * paramWeight;
-		currentValue = ((speed - 1.0f) * currentValue + input) / speed;
+		currentValue = currentValue + input * paramWeight / t;
 		return currentValue * amount * 4.0f;
 	}
 };

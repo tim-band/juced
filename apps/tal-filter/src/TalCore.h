@@ -120,7 +120,6 @@ public:
 
 private:
 
-	float *params;
 	Engine *engine;
 	float sampleRate;
 

@@ -59,7 +59,6 @@ TalCore::TalCore()
     lastPosInfo.bpm = 120;
 
 	engine = new Engine(sampleRate);
-	params = engine->param;
 	talPresets = new TalPreset*[NUMPROGRAMS];
 
 	for (int i = 0; i < NUMPROGRAMS; i++) talPresets[i] = new TalPreset(); 
@@ -128,7 +127,7 @@ void TalCore::setParameter (int index, float newValue)
 			engine->setLfoAmount(newValue);
 			break;
 		}
-		params[index] = newValue;
+		engine->param[index] = newValue;
 		talPresets[curProgram]->programData[index] = newValue;
 		sendChangeMessage (this);
 
@@ -162,7 +161,7 @@ const String TalCore::getParameterText (int index)
 {
 	if (index < NUMPARAM)
 	{
-		return String (params[index], 2);
+		return String (engine->param[index], 2);
 	}
     return String::empty;
 }
@@ -199,6 +198,7 @@ bool TalCore::producesMidi() const
 
 void TalCore::prepareToPlay (double sampleRate, int samplesPerBlock)
 {
+	engine->setSampleRate(sampleRate);
 }
 
 void TalCore::releaseResources()
@@ -210,12 +210,6 @@ void TalCore::releaseResources()
 void TalCore::processBlock (AudioSampleBuffer& buffer,
                                    MidiBuffer& midiMessages)
 {
-	// Change sample rate if required
-	if (sampleRate != this->getSampleRate())
-	{
-		sampleRate = this->getSampleRate();
-		engine->setSampleRate(sampleRate);
-	}
     AudioPlayHead::CurrentPositionInfo pos;
     if (getPlayHead() != 0 && getPlayHead()->getCurrentPosition (pos))
     {
@@ -249,7 +243,6 @@ void TalCore::processBlock (AudioSampleBuffer& buffer,
     // for each of our input channels, we'll attenuate its level by the
     // amount that our volume parameter is set to.
 	int numberOfChannels = getNumInputChannels();
-	int bufferSize = buffer.getNumSamples();
 
 	// midi buffer
 	MidiMessage controllerMidiMessage (0xF0);
@@ -312,7 +305,7 @@ void TalCore::processMidiPerSample(MidiBuffer::Iterator *midiIterator, MidiMessa
 void TalCore::handleController (const int controllerNumber,
 								const int controllerValue)
 {
-	if (params[MIDILEARN] > 0.0f)
+	if (engine->param[MIDILEARN] > 0.0f)
 	{
 		for (int i = 0; i < NUMPROGRAMS; i++) 
 		{

@@ -35,19 +35,16 @@ function generic_configuration(name, basedir)
     --filter { "system:linux" }
     configuration "linux"
         targetdir (basedir .. "linux")
-        libdirs { basedir .. "linux" }
         buildoptions { "-fPIC" }
 
     --filter { "system:windows" }
     configuration "windows"
         defines { "WIN32=1" }
         targetdir (basedir .. "windows")
-        libdirs { basedir .. "windows" }
 
     --filter { "system:macosx" }
     configuration "macosx"
         targetdir (basedir .. "macosx")
-        libdirs { basedir .. "macosx" }
 
     --filter { "configurations:Debug or Release" }
         --architecture "x86_64"
@@ -112,28 +109,13 @@ function configure_standard_options (link_with_libraries)
         "../../../../juce/extras/audio plugins"
     }
     flags { "NoPCH", "NoEditAndContinue", "ExtraWarnings" }
-
-    --filter { "configurations:Debug" }
-    configuration "Debug"
-
-    flags { "NoPCH" }
-    if (link_with_libraries) then
-        links { "juce_debug" }
-    end
-
-    --filter { "configurations:Release" }
-    configuration "Release"
-
     if (link_with_libraries) then
         links { "juce" }
     end
 
-    --filter { "configurations:Release32" }
-    configuration "Release32"
-
-    if (link_with_libraries) then
-        links { "juce32" }
-    end
+    --filter { "configurations:Debug" }
+    configuration "Debug"
+        flags { "NoPCH" }
 
     --filter { "action:gmake*" }
     configuration"gmake*"

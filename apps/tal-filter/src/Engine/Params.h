@@ -62,16 +62,21 @@ enum SYNTHPARAMETERS
 
 class Params
 {
-  public:
   float *parameters;
-
-  Params()  {
+public:
+  Params() : parameters(0) {
     parameters= new float[NUMPARAM];
 
     // Zero program values
     for(int j=0; j<NUMPARAM; j++) {
       parameters[j]= 0.0f;
     }
+  }
+  float &operator[](int index) {
+    return parameters[index];
+  }
+  ~Params() {
+    delete[] parameters;
   }
 };
 #endif
