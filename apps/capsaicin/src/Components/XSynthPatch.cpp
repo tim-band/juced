@@ -33,6 +33,8 @@
 XSynthPatch::XSynthPatch (XSynthPlugin* plugin_, Master* master_)
     : plugin (plugin_),
       master (master_),
+      partNumber(-1),
+      oscNumber(-1),
       osc1Select (0),
       osc2Select (0),
       osc3Select (0),
@@ -833,7 +835,6 @@ XSynthPatch::XSynthPatch (XSynthPlugin* plugin_, Master* master_)
     setSize (680, 400);
 
     //[Constructor] You can add your own custom stuff here..
-    partNumber = -1;
     setPartNumber (0);
     setOscillatorNumber (0);
 
