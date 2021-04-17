@@ -58,7 +58,7 @@ class InternalMessageQueue
 public:
     InternalMessageQueue()
     {
-        int ret = ::socketpair (AF_LOCAL, SOCK_STREAM, 0, fd);
+        int ret = ::pipe(fd);
         (void) ret; jassert (ret == 0);
     }
 
@@ -70,40 +70,41 @@ public:
 
     void postMessage (Message* msg)
     {
-        ScopedLock sl (lock);
-        queue.add (msg);
-
-        const unsigned char x = 0xff;
-        write (fd[0], &x, 1);
+        {
+            ScopedLock sl (queueLock);
+            queue.add (msg);
+        }
+        {
+            ScopedLock sl (writeLock);
+            const unsigned char x = 0xff;
+            write (fd[1], &x, 1);
+        }
     }
 
     bool isEmpty() const
     {
-        ScopedLock sl (lock);
+        ScopedLock sl (queueLock);
         return queue.size() == 0;
     }
 
     Message* popMessage()
     {
-        Message* m = 0;
-        ScopedLock sl (lock);
-
-        if (queue.size() != 0)
+        unsigned char x;
+        if (0 < read (fd[0], &x, 1))
         {
-            unsigned char x;
-            read (fd[1], &x, 1);
-
-            m = queue.getUnchecked(0);
+            ScopedLock sl (queueLock);
+            Message *m = queue.getUnchecked(0);
             queue.remove (0, false /* deleteObject */);
+            return m;
         }
-
-        return m;
+        return 0;
     }
 
-    int getWaitHandle() const     { return fd[1]; }
+    int getWaitHandle() const     { return fd[0]; }
 
 private:
-    CriticalSection lock;
+    CriticalSection queueLock;
+    CriticalSection writeLock;
     OwnedArray <Message> queue;
     int fd[2];
 };
