@@ -55,23 +55,23 @@ Run them from the `bin/linux` directory.
 | :-- | :-- | :-- | :-- | :-- |
 | analyzer | Looks like a spectrum analyzer | Runs, but no signal displayed | Not recognized as VST | |
 | bitmangler | lo-fi distortion | Yes | Yes | segfaults |
-| capsaicin | | Segfaults | | |
-| drumsynth | Drum Synthesizer | Memory allocation failure | | |
+| capsaicin | Additive synth | Runs but no sound | Takes down Jost | |
+| drumsynth | Drum Synthesizer | Yes | Crashes Jost | fails to scan |
 | dubdelay | What sort of plugin? | | | |
-| eqinox | 6-band parametric equalizer | Yes | segfaults | segfaults |
-| helix | | crashes | | |
+| eqinox | 6-band parametric equalizer | Yes | UI segfaults | segfaults |
+| helix | Synth with brutalist UX | Yes | UI crashes Jost | |
 | hybridreverb2 | Reverb | Runs, but what are these files it wants? | | |
 | implzr | Impulse reverb | Runs, but needs an impulse file. What format? | | |
-| jacked | | Runs, but just a blank screen | | |
+| jacked | | Runs, but just a blank screen | N/A | N/A |
 | jost | VST host | Yes! | N/A | N/A |
 | kombat | No idea | N/A? | N/A? Doesn't recognize it as a plugin | N/A |
 | monitor | Probably a monitor? But what sort of plugin | N/A? | N/A? | N/A |
-| nekobee | Simple monosynth | Yes | segfaults | segfaults during scanning! |
+| nekobee | Simple monosynth | Yes | Works but clips, UI segfaults | segfaults during scanning! |
 | notemap | What sort of plugin? | N/A? | N/A? | N/A |
 | peggy2000 | Some sort of synth | Maybe... needs a huge screen, can't work it out | | |
-| soundcrab | Soundfont player | | | |
+| soundcrab | Soundfont player | Runs, but just drones | | |
 | tal-filter | | runs, but sounds terrible | runs, sounds terrible | fails to scan |
-| tal-reverb | Reverb | Yes | | |
-| vex | | Crashes | | |
-| wolpertinger | Weird noise making synth | Yes | Yes | |
+| tal-reverb | Reverb | Yes, but clips | Yes, but clips | fails to scan |
+| vex | Decent polysynth | Yes | Yes but sounds terrible | segfaults |
+| wolpertinger | Weird noise making synth | Yes | Yes | Yes! |
 | unit_testing | Tests | No | N/A | N/A |
