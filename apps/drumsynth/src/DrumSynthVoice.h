@@ -90,7 +90,9 @@ public:
           numVoice (numVoice_),
           noteNumber (0),
           angleDelta (0.0),
-          tailOff (0.0)
+          tailOff (0.0),
+          Length(0),
+          tpos(0)
     {
         mem_t = 1.0f, mem_o = 1.0f, mem_n = 1.0f, mem_b = 1.0f, mem_tune = 0.0f, mem_time = 1.0f;
 

@@ -125,7 +125,7 @@ void iniparser_dump(dictionary * d, FILE * f);
   the dictionary, do not free or modify it.
  */
 /*--------------------------------------------------------------------------*/
-char * iniparser_getstring(dictionary * d, const char * key, char * def);
+const char * iniparser_getstring(const dictionary * d, const char * key, const char * def);
 
 /*-------------------------------------------------------------------------*/
 /**
@@ -154,7 +154,7 @@ char * iniparser_getstring(dictionary * d, const char * key, char * def);
   Credits: Thanks to A. Becker for suggesting strtol()
  */
 /*--------------------------------------------------------------------------*/
-int iniparser_getint(dictionary * d, const char * key, int notfound);
+int iniparser_getint(const dictionary * d, const char * key, int notfound);
 
 /*-------------------------------------------------------------------------*/
 /**
@@ -169,7 +169,7 @@ int iniparser_getint(dictionary * d, const char * key, int notfound);
   the notfound value is returned.
  */
 /*--------------------------------------------------------------------------*/
-double iniparser_getdouble(dictionary * d, char * key, double notfound);
+double iniparser_getdouble(const dictionary * d, const char * key, double notfound);
 
 /*-------------------------------------------------------------------------*/
 /**
@@ -203,7 +203,7 @@ double iniparser_getdouble(dictionary * d, char * key, double notfound);
   necessarily have to be 0 or 1.
  */
 /*--------------------------------------------------------------------------*/
-int iniparser_getboolean(dictionary * d, const char * key, int notfound);
+int iniparser_getboolean(const dictionary * d, const char * key, int notfound);
 
 
 /*-------------------------------------------------------------------------*/

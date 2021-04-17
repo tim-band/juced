@@ -491,15 +491,21 @@ String::operator const char*() const throw()
         String* const mutableThis = const_cast <String*> (this);
 
         mutableThis->dupeInternalIfMultiplyReferenced();
-        int len = CharacterFunctions::bytesRequiredForCopy (text->text) + 1;
+        int len2 = CharacterFunctions::bytesRequiredForCopy (text->text);
+        if (len2 < 0) {
+            // failure to convert
+            return (const char*) emptyCharString;
+        }
+        int len1 = length();
+        int totalLength = (len1 + 1) * sizeof(juce_wchar) + len2 + 1;
+        // Make room for the MBCs copy after the memory used to store the wide string
         mutableThis->text = (InternalRefCountedStringHolder*)
                                 juce_realloc (text, sizeof (InternalRefCountedStringHolder)
-                                                      + (len * sizeof (juce_wchar) + len));
-        char* otherCopy = (char*) (text->text + len);
-        --len;
+                                                      + totalLength);
+        char* otherCopy = (char*) (text->text + len1 + 1);
 
-        CharacterFunctions::copy (otherCopy, text->text, len);
-        otherCopy [len] = 0;
+        CharacterFunctions::copy (otherCopy, text->text, len2);
+        otherCopy[len2] = 0;
         return otherCopy;
     }
 }

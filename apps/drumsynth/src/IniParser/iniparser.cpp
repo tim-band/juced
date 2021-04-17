@@ -265,10 +265,10 @@ void iniparser_dump_ini(dictionary * d, FILE * f)
   the dictionary, do not free or modify it.
  */
 /*--------------------------------------------------------------------------*/
-char * iniparser_getstring(dictionary * d, const char * key, char * def)
+const char * iniparser_getstring(const dictionary * d, const char * key, const char * def)
 {
-    char * lc_key ;
-    char * sval ;
+    const char * lc_key ;
+    const char * sval ;
 
     if (d==NULL || key==NULL)
         return def ;
@@ -305,9 +305,9 @@ char * iniparser_getstring(dictionary * d, const char * key, char * def)
   Credits: Thanks to A. Becker for suggesting strtol()
  */
 /*--------------------------------------------------------------------------*/
-int iniparser_getint(dictionary * d, const char * key, int notfound)
+int iniparser_getint(const dictionary * d, const char * key, int notfound)
 {
-    char    *   str ;
+    const char *str ;
 
     str = iniparser_getstring(d, key, INI_INVALID_KEY);
     if (str==INI_INVALID_KEY) return notfound ;
@@ -327,9 +327,9 @@ int iniparser_getint(dictionary * d, const char * key, int notfound)
   the notfound value is returned.
  */
 /*--------------------------------------------------------------------------*/
-double iniparser_getdouble(dictionary * d, char * key, double notfound)
+double iniparser_getdouble(const dictionary * d, const char * key, double notfound)
 {
-    char    *   str ;
+    const char *str ;
 
     str = iniparser_getstring(d, key, INI_INVALID_KEY);
     if (str==INI_INVALID_KEY) return notfound ;
@@ -368,10 +368,10 @@ double iniparser_getdouble(dictionary * d, char * key, double notfound)
   necessarily have to be 0 or 1.
  */
 /*--------------------------------------------------------------------------*/
-int iniparser_getboolean(dictionary * d, const char * key, int notfound)
+int iniparser_getboolean(const dictionary * d, const char * key, int notfound)
 {
-    char    *   c ;
-    int         ret ;
+    const char *c ;
+    int ret ;
 
     c = iniparser_getstring(d, key, INI_INVALID_KEY);
     if (c==INI_INVALID_KEY) return notfound ;

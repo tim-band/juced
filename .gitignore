@@ -19,4 +19,4 @@ Makefile
 # unwanted files
 bin/*
 vst/vstsdk*/
-/.vscode
+/.vscode/
