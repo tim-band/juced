@@ -442,7 +442,7 @@ void MidiPadsPlugin::processBlock (AudioSampleBuffer& buffer,
                 int inch = 1+(int)(param[kChIn]*15.1f);
                 if (midi_message.isNoteOn() && (midi_message.getVelocity() > 1) && midi_message.isForChannel(inch))
                 {        
-                    if (param[kNoteOnTrig]>=0.5f && trigger[0]*127.1f)
+                    if (param[kNoteOnTrig]>=0.5f)
                     {
                         trig=true;
                         triggervel=midi_message.getVelocity();

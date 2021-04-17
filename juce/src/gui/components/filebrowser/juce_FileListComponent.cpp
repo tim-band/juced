@@ -89,6 +89,8 @@ public:
                            TimeSliceThread& thread_) throw()
         : owner (owner_),
           thread (thread_),
+          highlighted(false),
+          index(-1),
           icon (0)
     {
     }
