@@ -55,13 +55,13 @@ Run them from the `bin/linux` directory.
 | :-- | :-- | :-- | :-- | :-- |
 | analyzer | Looks like a spectrum analyzer | Runs, but no signal displayed | Not recognized as VST | |
 | bitmangler | lo-fi distortion | Yes | Yes | segfaults |
-| capsaicin | Additive synth | Runs but no sound | Takes down Jost | |
-| drumsynth | Drum Synthesizer | Yes | Crashes Jost | fails to scan |
+| capsaicin | Additive synth | Runs but no sound | Yes | segfaults |
+| drumsynth | Drum Synthesizer | Yes | Yes | fails to scan |
 | dubdelay | What sort of plugin? | | | |
 | eqinox | 6-band parametric equalizer | Yes | UI segfaults | segfaults |
 | helix | Synth with brutalist UX | Yes | UI crashes Jost | |
 | hybridreverb2 | Reverb | Runs, but what are these files it wants? | | |
-| implzr | Impulse reverb | Runs, but needs an impulse file. What format? | | |
+| implzr | Impulse reverb | Runs, uses .wav files for impulses | | |
 | jacked | | Runs, but just a blank screen | N/A | N/A |
 | jost | VST host | Yes! | N/A | N/A |
 | kombat | No idea | N/A? | N/A? Doesn't recognize it as a plugin | N/A |

@@ -315,6 +315,7 @@ AudioParameterThread::AudioParameterThread ()
 AudioParameterThread::~AudioParameterThread ()
 {  
     stopThread (5000);
+    clearSingletonInstance();
 }
 
 void AudioParameterThread::sendParameterChange (AudioParameter* parameter)

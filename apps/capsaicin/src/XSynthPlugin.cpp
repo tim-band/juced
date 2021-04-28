@@ -36,7 +36,38 @@ int SOUND_BUFFER_SIZE = 512;
 int OSCIL_SIZE = 512;
 
 //==============================================================================
-int XSynthPlugin::numInstances = 0;
+int PluginGlobals::numInstances = 0;
+
+PluginGlobals::PluginGlobals() {
+    if (numInstances++ != 0) {
+        return;
+    }
+    Config* config = Config::getInstance ();
+    config->load ();
+
+    SAMPLE_RATE = config->SampleRate;
+    SOUND_BUFFER_SIZE = config->SoundBufferSize;
+    OSCIL_SIZE = config->OscilSize;
+
+    denormalkillbuf = new REALTYPE [SOUND_BUFFER_SIZE];
+    for (int i = 0; i < SOUND_BUFFER_SIZE; i++)
+        denormalkillbuf[i] = (RND - 0.5) * 1e-16;
+
+    OscilGen::tmpsmps = new REALTYPE[OSCIL_SIZE];
+    newFFTFREQS (&OscilGen::outoscilFFTfreqs, OSCIL_SIZE / 2);
+}
+
+PluginGlobals::~PluginGlobals() {
+    if (--numInstances != 0) {
+        return;
+    }
+    Config::deleteInstance ();
+
+    delete[] denormalkillbuf;
+    denormalkillbuf = 0;
+    delete[] OscilGen::tmpsmps;
+    OscilGen::tmpsmps = 0;
+}
 
 //==============================================================================
 XSynthPlugin::XSynthPlugin()
@@ -53,14 +84,6 @@ XSynthPlugin::XSynthPlugin()
 XSynthPlugin::~XSynthPlugin()
 {
     deleteAndZero (parameters);
-
-    if (--XSynthPlugin::numInstances == 0)
-    {
-        Config::deleteInstance ();
-
-        delete[] denormalkillbuf;
-        delete[] OscilGen::tmpsmps;
-    }
 }
 
 //==============================================================================
@@ -337,23 +360,6 @@ AudioProcessorEditor* XSynthPlugin::createEditor()
 //==============================================================================
 AudioProcessor* JUCE_CALLTYPE createPluginFilter (const String& createArgs)
 {
-    if (XSynthPlugin::numInstances++ == 0)
-    {
-        Config* config = Config::getInstance ();
-        config->load ();
-
-        SAMPLE_RATE = config->SampleRate;
-        SOUND_BUFFER_SIZE = config->SoundBufferSize;
-        OSCIL_SIZE = config->OscilSize;
-
-        denormalkillbuf = new REALTYPE [SOUND_BUFFER_SIZE];
-        for (int i = 0; i < SOUND_BUFFER_SIZE; i++)
-            denormalkillbuf[i] = (RND - 0.5) * 1e-16;
-
-        OscilGen::tmpsmps = new REALTYPE[OSCIL_SIZE];
-        newFFTFREQS (&OscilGen::outoscilFFTfreqs, OSCIL_SIZE / 2);
-    }
-
     return new XSynthPlugin();
 }
 

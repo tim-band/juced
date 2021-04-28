@@ -150,7 +150,7 @@ public:
     void run();
 
     //==============================================================================
-    juce_DeclareSingleton (AudioParameterThread, true)
+    juce_DeclareSingleton (AudioParameterThread, false)
     
 private:
 

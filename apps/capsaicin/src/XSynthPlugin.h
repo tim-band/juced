@@ -36,12 +36,18 @@
 class XSynthEditor;
 class XSynthPlugin;
 
+class PluginGlobals {
+    static int numInstances;
+public:
+    PluginGlobals();
+    ~PluginGlobals();
+};
 
 //==============================================================================
 /**
             Capsaicin is a powerful additive synthesizer
 */
-class XSynthPlugin  : public AudioPlugin
+class XSynthPlugin : private PluginGlobals, public AudioPlugin
 {
 public:
     //==============================================================================
@@ -71,9 +77,6 @@ public:
     void getStateInformation (MemoryBlock& destData);
     void setStateInformation (const void* data, int sizeInBytes);
     void setCurrentProgram (int index);
-
-    //==============================================================================
-    static int numInstances;
 
     //==============================================================================
     juce_UseDebuggingNewOperator
