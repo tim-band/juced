@@ -55,15 +55,15 @@ Run them from the `bin/linux` directory.
 | :-- | :-- | :-- | :-- | :-- |
 | analyzer | Looks like a spectrum analyzer | Runs, but no signal displayed | Not recognized as VST | |
 | bitmangler | lo-fi distortion | Yes | Yes | segfaults |
-| capsaicin | Additive synth | Runs but no sound | Yes | segfaults |
-| drumsynth | Drum Synthesizer | Yes | Yes | fails to scan |
-| dubdelay | What sort of plugin? | | | |
-| eqinox | 6-band parametric equalizer | Yes | UI segfaults | segfaults |
-| helix | Synth with brutalist UX | Yes | UI crashes Jost | |
+| capsaicin | Additive synth | Runs but no sound | Yes | Yes |
+| drumsynth | Drum Synthesizer | Yes | Yes | Yes |
+| dubdelay | Mad delay | | | Yes, but the UI doesn't |
+| eqinox | 6-band parametric equalizer | Yes | UI segfaults | Runs, but UI doesn't work |
+| helix | Synth with brutalist UX | Yes | UI crashes Jost | Yes |
 | hybridreverb2 | Reverb | Runs, but what are these files it wants? | | |
-| implzr | Impulse reverb | Runs, uses .wav files for impulses | | |
+| implzr | Impulse reverb | Runs, uses .wav files for impulses | | UI works once |
 | jacked | | Runs, but just a blank screen | N/A | N/A |
-| jost | VST host | Yes! | N/A | N/A |
+| jost | VST host | Yes | N/A | N/A |
 | kombat | No idea | N/A? | N/A? Doesn't recognize it as a plugin | N/A |
 | monitor | Probably a monitor? But what sort of plugin | N/A? | N/A? | N/A |
 | nekobee | Simple monosynth | Yes | Works but clips, UI segfaults | segfaults during scanning! |
@@ -71,7 +71,7 @@ Run them from the `bin/linux` directory.
 | peggy2000 | Some sort of synth | Maybe... needs a huge screen, can't work it out | | |
 | soundcrab | Soundfont player | Runs, but just drones | | |
 | tal-filter | | runs, but sounds terrible | runs, sounds terrible | fails to scan |
-| tal-reverb | Reverb | Yes, but clips | Yes, but clips | fails to scan |
+| tal-reverb | Reverb | Yes, but clips | Yes, but clips | fails to scan (sometimes segfaulting REAPER) |
 | vex | Decent polysynth | Yes | Yes but sounds terrible | segfaults |
-| wolpertinger | Weird noise making synth | Yes | Yes | Yes! |
+| wolpertinger | Weird noise making synth | Yes | Yes | Yes |
 | unit_testing | Tests | No | N/A | N/A |

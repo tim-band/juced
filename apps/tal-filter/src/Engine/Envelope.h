@@ -49,15 +49,17 @@ public:
 	// for small w, a = w/2. w = 2pi*f/samplerate so a = pi*f/samplerate
 	// t = 1/f (right? maybe there's a pi in there)
 	// => a = (pi / samplerate) / t
+	// add some decay in so that the value doesn't drift too far
 	float tick(float input, float amount, float speed)
 	{
+		static const float decay = 0.005;
 		static const float slowest = 0.05;
 		static const float fastest = 0.5;
 		float t = slowest + (fastest - slowest) * speed;
-		input = fabs(input);
+		input = input * input;
 		if (input > 1.0f) input = 1.0f;
-		currentValue = currentValue + input * paramWeight / t;
-		return currentValue * amount * 4.0f;
+		currentValue += input * paramWeight / t - currentValue * paramWeight / decay;
+		return currentValue * amount;
 	}
 };
 #endif

@@ -100,12 +100,14 @@ void ImageSlider::paint (Graphics& g)
     float x = 0, y = 0;
     int minX, maxX;
     const bool sliderEnabled = isEnabled();
-    const bool hightlight = isMouseOverOrDragging();
+    //const bool highlight = isMouseOverOrDragging();
+    const int thumbWidth = thumbImage? thumbImage->getWidth() : 0;
+    const int thumbHeight = thumbImage? thumbImage->getHeight() : 0;
 
     if (getSliderStyle() == Slider::LinearVertical)
     {
-        x = (getWidth () - thumbImage->getWidth()) / 2;
-        y = (getHeight () - thumbImage->getHeight()) * (1.0f - valueToProportionOfLength (getValue()));
+        x = (getWidth () - thumbWidth) / 2;
+        y = (getHeight () - thumbHeight) * (1.0f - valueToProportionOfLength (getValue()));
         minX = minOffset;
         maxX = getHeight() - maxOffset;
 
@@ -114,12 +116,12 @@ void ImageSlider::paint (Graphics& g)
         g.drawVerticalLine (getWidth() / 2,
                             minX, jmax ((int) y + minOffset, minX));
         g.drawVerticalLine (getWidth() / 2,
-                            jmin ((int)y + thumbImage->getHeight() - maxOffset, maxX), maxX);
+                            jmin ((int)y + thumbHeight - maxOffset, maxX), maxX);
     }
     else if (getSliderStyle() == Slider::LinearHorizontal)
     {
-        x = (getWidth () - thumbImage->getWidth()) * valueToProportionOfLength (getValue());
-        y = (getHeight () - thumbImage->getHeight()) / 2;
+        x = (getWidth () - thumbWidth) * valueToProportionOfLength (getValue());
+        y = (getHeight () - thumbHeight) / 2;
         minX = minOffset;
         maxX = getWidth() - maxOffset;
 
@@ -128,7 +130,7 @@ void ImageSlider::paint (Graphics& g)
         g.drawHorizontalLine (getHeight() / 2,
                                 minX, jmax ((int) x + minOffset, minX));
         g.drawHorizontalLine (getHeight() / 2,
-                                jmin ((int) x + thumbImage->getWidth() - maxOffset, maxX), maxX);
+                                jmin ((int) x + thumbWidth - maxOffset, maxX), maxX);
     }
 
     if (thumbImage)
@@ -140,14 +142,14 @@ void ImageSlider::paint (Graphics& g)
 
         // draw thumb image
         g.drawImage (thumbImage,
-                        (int) x, (int) y, thumbImage->getWidth(), thumbImage->getHeight(),
-                        0, 0, thumbImage->getWidth(), thumbImage->getHeight());
+                (int) x, (int) y, thumbWidth, thumbHeight,
+                0, 0, thumbWidth, thumbHeight);
 
-        if (sliderEnabled && hightlight)
+/*        if (sliderEnabled && highlight)
         {
-            // g.setColour (Colours::yellow.withAlpha (0.25f));
-            // g.fillRect ((int) x, (int) y, thumbImage->getWidth(), thumbImage->getHeight());
-        }
+            g.setColour (Colours::yellow.withAlpha (0.25f));
+            g.fillRect ((int) x, (int) y, thumbWidth, thumbHeight);
+        }*/
     }
 }
 
