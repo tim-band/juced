@@ -86,7 +86,7 @@ public:
 
     //==============================================================================
     /** Singleton declaration */
-    juce_DeclareSingleton (Config, true)
+    juce_DeclareSingleton (Config, false)
 
 protected:
 

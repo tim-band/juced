@@ -32,7 +32,7 @@ int fluid_settings_remove_option(fluid_settings_t* settings, char* name, char* s
 
 
 typedef int (*fluid_num_update_t)(void* data, char* name, double value);
-typedef int (*fluid_str_update_t)(void* data, char* name, char* value);
+typedef int (*fluid_str_update_t)(void* data, const char* name, const char* value);
 typedef int (*fluid_int_update_t)(void* data, char* name, int value);
 
 /** returns 0 if the value has been resgister correctly, non-zero

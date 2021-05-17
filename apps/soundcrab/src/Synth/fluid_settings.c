@@ -33,7 +33,7 @@
 
 static void fluid_settings_init(fluid_settings_t* settings);
 static void fluid_settings_hash_delete(void* value, int type);
-static int fluid_settings_tokenize(char* s, char *buf, char** ptr);
+static int fluid_settings_tokenize(const char* s, char *buf, char** ptr);
 
 
 typedef struct {
@@ -46,7 +46,7 @@ typedef struct {
 } fluid_str_setting_t;
 
 static fluid_str_setting_t*
-new_fluid_str_setting(char* value, char* def, int hints, fluid_str_update_t fun, void* data)
+new_fluid_str_setting(const char* value, char* def, int hints, fluid_str_update_t fun, void* data)
 {
   fluid_str_setting_t* str;
   str = FLUID_NEW(fluid_str_setting_t);
@@ -199,7 +199,7 @@ void fluid_settings_init(fluid_settings_t* settings)
   fluid_midi_driver_settings(settings);
 }
 
-static int fluid_settings_tokenize(char* s, char *buf, char** ptr)
+static int fluid_settings_tokenize(const char* s, char *buf, char** ptr)
 {
   char *tokstr, *tok;
   int n = 0;
@@ -477,7 +477,7 @@ int fluid_settings_is_realtime(fluid_settings_t* settings, char* name)
   }
 }
 
-int fluid_settings_setstr(fluid_settings_t* settings, char* name, char* str)
+int fluid_settings_setstr(fluid_settings_t* settings, const char* name, const char* str)
 {
   char* tokens[MAX_SETTINGS_TOKENS];
   char buf[MAX_SETTINGS_LABEL+1];

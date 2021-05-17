@@ -45,12 +45,19 @@
 
 class SoundCrabEditor;
 
+class WithConfig {
+    static int instances;
+public:
+    WithConfig();
+    ~WithConfig();
+};
+
 //==============================================================================
 /**
     A simple plugin filter that just applies a gain change to its input.
 
 */
-class SoundCrabPlugin  : public AudioPlugin
+class SoundCrabPlugin : public WithConfig, public AudioPlugin
 {
 public:
 
@@ -91,8 +98,6 @@ public:
 
     //==============================================================================
     juce_UseDebuggingNewOperator
-
-    static int instances;
 
 protected:
 

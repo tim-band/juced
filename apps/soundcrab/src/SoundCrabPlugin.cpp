@@ -34,7 +34,17 @@
 
 
 //==============================================================================
-int SoundCrabPlugin::instances = 0;
+int WithConfig::instances = 0;
+
+WithConfig::WithConfig() {
+    if (WithConfig::instances++ == 0)
+        Config::getInstance();
+}
+
+WithConfig::~WithConfig() {
+    if (--WithConfig::instances == 0)
+        Config::deleteInstance();
+}
 
 //==============================================================================
 SoundCrabPlugin::SoundCrabPlugin()
@@ -73,10 +83,6 @@ SoundCrabPlugin::~SoundCrabPlugin()
 
     // free parameters
     deleteAndZero (parameters);
-
-    // delete config
-    if (--SoundCrabPlugin::instances == 0)
-        Config::deleteInstance ();
 }
 
 //==============================================================================
@@ -464,11 +470,5 @@ AudioProcessorEditor* SoundCrabPlugin::createEditor()
 
 AudioProcessor* JUCE_CALLTYPE createPluginFilter (const String& createArgs)
 {
-    if (SoundCrabPlugin::instances++ == 0)
-    {
-        // create the config
-        /* Config* config = */ Config::getInstance ();
-    }
-
     return new SoundCrabPlugin();
 }

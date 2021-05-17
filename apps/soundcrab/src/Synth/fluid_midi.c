@@ -113,12 +113,11 @@ void delete_fluid_midi_file(fluid_midi_file* mf)
 int fluid_midi_file_getc(fluid_midi_file* mf)
 {
 	unsigned char c;
-	int n;
 	if (mf->c >= 0) {
 		c = mf->c;
 		mf->c = -1;
 	} else {
-		n = FLUID_FREAD(&c, 1, 1, mf->fp);
+		FLUID_FREAD(&c, 1, 1, mf->fp);
 		mf->trackpos++;
 	}
 	return (int) c;
@@ -361,7 +360,7 @@ int fluid_midi_file_read_event(fluid_midi_file* mf, fluid_track_t* track)
 	unsigned char* metadata = NULL;
 	unsigned char* dyn_buf = NULL;
 	unsigned char static_buf[256];
-	int nominator, denominator, clocks, notes, sf, mi;
+	int nominator, denominator, clocks, notes;
 	fluid_midi_event_t* evt;
 	int channel = 0;
 	int param1 = 0;
@@ -557,8 +556,6 @@ int fluid_midi_file_read_event(fluid_midi_file* mf, fluid_track_t* track)
 					result = FLUID_FAILED;
 					break;
 				}
-				sf = metadata[0];
-				mi = metadata[1];
 				break;
 
 			case MIDI_SEQUENCER_EVENT:

@@ -590,7 +590,7 @@ fluid_defpreset_noteon(fluid_defpreset_t* preset, fluid_synth_t* synth, int chan
 {
   fluid_preset_zone_t *preset_zone, *global_preset_zone;
   fluid_inst_t* inst;
-  fluid_inst_zone_t *inst_zone, *global_inst_zone, *z;
+  fluid_inst_zone_t *inst_zone, *global_inst_zone;
   fluid_sample_t* sample;
   fluid_voice_t* voice;
   fluid_mod_t * mod;
@@ -634,9 +634,6 @@ fluid_defpreset_noteon(fluid_defpreset_t* preset, fluid_synth_t* synth, int chan
 	  if (voice == NULL) {
 	    return FLUID_FAILED;
 	  }
-
-
-	  z = inst_zone;
 
 	  /* Instrument level, generators */
 
