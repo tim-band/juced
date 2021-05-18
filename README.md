@@ -57,7 +57,7 @@ Run them from the `bin/linux` directory.
 | bitmangler | lo-fi distortion | Yes | Yes | segfaults |
 | capsaicin | Additive synth | Runs but no sound | Yes | Yes |
 | drumsynth | Drum Synthesizer | Yes | Yes | Yes |
-| dubdelay | Mad delay | | | Yes, but the UI doesn't |
+| dubdelay | Mad delay | N/A | Yes | Yes, but the sliders don't render |
 | eqinox | 6-band parametric equalizer | Yes | UI segfaults | Runs, but UI doesn't work |
 | helix | Synth with brutalist UX | Yes | UI crashes Jost | Yes |
 | hybridreverb2 | Reverb | Runs, but what are these files it wants? | | |
@@ -66,7 +66,7 @@ Run them from the `bin/linux` directory.
 | jost | VST host | Yes | N/A | N/A |
 | kombat | No idea | N/A? | N/A? Doesn't recognize it as a plugin | N/A |
 | monitor | Probably a monitor? But what sort of plugin | N/A? | N/A? | N/A |
-| nekobee | Simple monosynth | Yes | Works but clips, UI segfaults | segfaults during scanning! |
+| nekobee | Simple monosynth | Yes | Yes | Yes, but sliders don't work |
 | notemap | What sort of plugin? | N/A? | N/A? | N/A |
 | peggy2000 | Some sort of synth | Maybe... needs a huge screen, can't work it out | | |
 | soundcrab | Soundfont player | Runs, but just drones | | |

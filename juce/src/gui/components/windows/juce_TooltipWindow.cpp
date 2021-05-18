@@ -44,7 +44,8 @@ TooltipWindow::TooltipWindow (Component* const parentComponent,
       mouseY (0),
       lastHideTime (0),
       lastComponentUnderMouse (0),
-      changedCompsSinceShown (true)
+      changedCompsSinceShown (true),
+      lastTipUnderMouse(false)
 {
     startTimer (123);
 

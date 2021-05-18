@@ -272,10 +272,12 @@ void NekobeeMain::paint (Graphics& g)
                 335, 79, 53, 12,
                 Justification::centred, true);
 
-    g.setColour (Colours::black);
-    g.drawImage (cachedImage_bee_logo_png,
-                 18, 8, 76, 64,
-                 0, 0, cachedImage_bee_logo_png->getWidth(), cachedImage_bee_logo_png->getHeight());
+    if (cachedImage_bee_logo_png) {
+        g.setColour (Colours::black);
+        g.drawImage (cachedImage_bee_logo_png,
+            18, 8, 76, 64,
+            0, 0, cachedImage_bee_logo_png->getWidth(), cachedImage_bee_logo_png->getHeight());
+    }
 
     g.setColour (Colour (0xc5ffffff));
     g.setFont (Font (21.3000f, Font::bold | Font::italic));
