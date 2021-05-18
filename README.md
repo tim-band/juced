@@ -54,7 +54,7 @@ Run them from the `bin/linux` directory.
 | app | description | working? | VST working in Jost? | VST working in Reaper? |
 | :-- | :-- | :-- | :-- | :-- |
 | analyzer | Looks like a spectrum analyzer | Runs, but no signal displayed | Not recognized as VST | |
-| bitmangler | lo-fi distortion | Yes | Yes | segfaults |
+| bitmangler | lo-fi distortion | Yes | Yes | Yes |
 | capsaicin | Additive synth | Runs but no sound | Yes | Yes |
 | drumsynth | Drum Synthesizer | Yes | Yes | Yes |
 | dubdelay | Mad delay | N/A | Yes | Yes, but the sliders don't render |

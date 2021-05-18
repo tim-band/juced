@@ -252,10 +252,12 @@ void bitManglerEditor::paint (Graphics& g)
 
     g.fillAll (Colours::white);
 
-    g.setColour (Colours::black);
-    g.drawImage (cachedImage_metal2_png,
-                 0, 0, 381, 163,
-                 0, 0, cachedImage_metal2_png->getWidth(), cachedImage_metal2_png->getHeight());
+    if (cachedImage_metal2_png) {
+        g.setColour (Colours::black);
+        g.drawImage (cachedImage_metal2_png,
+                0, 0, 381, 163,
+                0, 0, cachedImage_metal2_png->getWidth(), cachedImage_metal2_png->getHeight());
+    }
 
     g.setGradientFill (ColourGradient (Colour (0xc2000000),
                                        184.0f, 48.0f,
