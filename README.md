@@ -57,16 +57,16 @@ Run them from the `bin/linux` directory.
 | bitmangler | lo-fi distortion | Yes | Yes | Yes |
 | capsaicin | Additive synth | Runs but no sound | Yes | Yes |
 | drumsynth | Drum Synthesizer | Yes | Yes | Yes |
-| dubdelay | Mad delay | N/A | Yes | Yes, but the sliders don't render |
+| dubdelay | Mad delay | N/A | Yes | Yes |
 | eqinox | 6-band parametric equalizer | Yes | UI segfaults | Runs, but UI doesn't work |
-| helix | Synth with brutalist UX | Yes | UI crashes Jost | Yes |
+| helix | Synth with brutalist UX | Yes | Yes | Yes |
 | hybridreverb2 | Reverb | Runs, but what are these files it wants? | | |
-| implzr | Impulse reverb | Runs, uses .wav files for impulses | | UI works once |
+| implzr | Impulse reverb (uses .wav files) | Yes? | | UI works once |
 | jacked | | Runs, but just a blank screen | N/A | N/A |
 | jost | VST host | Yes | N/A | N/A |
 | kombat | No idea | N/A? | N/A? Doesn't recognize it as a plugin | N/A |
 | monitor | Probably a monitor? But what sort of plugin | N/A? | N/A? | N/A |
-| nekobee | Simple monosynth | Yes | Yes | Yes, but sliders don't work |
+| nekobee | Simple monosynth | Yes | Yes | Yes |
 | notemap | What sort of plugin? | N/A? | N/A? | N/A |
 | peggy2000 | Some sort of synth | Maybe... needs a huge screen, can't work it out | | |
 | soundcrab | Soundfont player | Runs, but just drones | | |

@@ -35,7 +35,7 @@ function generic_configuration(name, basedir)
     --filter { "system:linux" }
     configuration "linux"
         targetdir (basedir .. "linux")
-        buildoptions { "-fPIC" }
+        buildoptions { "-fPIC", "-fvisibility=hidden" }
 
     --filter { "system:windows" }
     configuration "windows"
