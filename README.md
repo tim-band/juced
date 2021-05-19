@@ -72,6 +72,6 @@ Run them from the `bin/linux` directory.
 | soundcrab | Soundfont player | Runs, but just drones | | |
 | tal-filter | | runs, but sounds terrible | runs, sounds terrible | fails to scan |
 | tal-reverb | Reverb | Yes, but clips | Yes, but clips | fails to scan (sometimes segfaulting REAPER) |
-| vex | Decent polysynth | Yes | Yes but sounds terrible | segfaults |
+| vex | Decent polysynth | Yes | Yes but sounds terrible | Runs but UI does not update correctly |
 | wolpertinger | Weird noise making synth | Yes | Yes | Yes |
 | unit_testing | Tests | No | N/A | N/A |

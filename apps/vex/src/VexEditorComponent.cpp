@@ -37,7 +37,8 @@
 
 VexEditorComponent::VexEditorComponent (VexFilter* const ownerFilter)
     : AudioProcessorEditor(ownerFilter)
-{	//Comboboxes, wave selection
+{
+	//Comboboxes, wave selection
 	addAndMakeVisible (comboBox = new ComboBox (String::empty));
     comboBox->setEditableText (false);
     comboBox->setJustificationType (Justification::centredLeft);
@@ -235,9 +236,11 @@ VexEditorComponent::~VexEditorComponent()
 
 void VexEditorComponent::paint (Graphics& g)
 {
-    g.drawImage (internalCachedImage1,
-                 0, 0, 800, 500,
-                 0, 0, internalCachedImage1->getWidth(), internalCachedImage1->getHeight());
+	if (internalCachedImage1) {
+		g.drawImage (internalCachedImage1,
+				0, 0, 800, 500,
+				0, 0, internalCachedImage1->getWidth(), internalCachedImage1->getHeight());
+	}
 }
 
 void VexEditorComponent::resized()
