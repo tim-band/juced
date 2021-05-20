@@ -73,8 +73,6 @@ public:
           //cell size -recalculate in case of resizing
           SliderWidth = getWidth() / numSliders;
 
-          int middle = int(getHeight() * 0.5f);
-
           //Draw bars
           g.setColour(Colour(50,50,50));
           for(int i = 0; i < numSliders; i++){

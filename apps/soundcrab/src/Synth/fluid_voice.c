@@ -246,13 +246,9 @@ fluid_voice_write(fluid_voice_t* voice,
 		 fluid_real_t* dsp_left_buf, fluid_real_t* dsp_right_buf,
 		 fluid_real_t* dsp_reverb_buf, fluid_real_t* dsp_chorus_buf)
 {
-  unsigned int i;
-  fluid_real_t incr;
   fluid_real_t fres;
   fluid_real_t target_amp;	/* target amplitude */
   int count;
-
-  int dsp_interp_method = voice->interp_method;
 
   fluid_real_t dsp_buf[FLUID_BUFSIZE];
   fluid_env_data_t* env_data;
@@ -816,8 +812,6 @@ void fluid_voice_start(fluid_voice_t* voice)
 int
 fluid_voice_calculate_runtime_synthesis_parameters(fluid_voice_t* voice)
 {
-  fluid_real_t x;
-  fluid_real_t q_db;
   int i;
 
   int list_of_generators_to_initialize[35] = {

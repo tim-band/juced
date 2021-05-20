@@ -1307,7 +1307,7 @@ public:
     {
         if (editorComp != 0)
         {
-            if (! (canHostDo ("sizeWindow") && sizeWindow (newWidth, newHeight)))
+            if (! (canHostDo (const_cast<char*>("sizeWindow")) && sizeWindow (newWidth, newHeight)))
             {
                 // some hosts don't support the sizeWindow call, so do it manually..
 #if JUCE_MAC

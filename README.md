@@ -70,8 +70,8 @@ Run them from the `bin/linux` directory.
 | notemap | What sort of plugin? | N/A? | N/A? | N/A |
 | peggy2000 | Some sort of synth | Maybe... needs a huge screen, can't work it out | | |
 | soundcrab | Soundfont player | Runs, but just drones | | |
-| tal-filter | | runs, but sounds terrible | runs, sounds terrible | fails to scan |
-| tal-reverb | Reverb | Yes, but clips | Yes, but clips | fails to scan (sometimes segfaulting REAPER) |
+| tal-filter | | runs, but sounds terrible | runs, sounds terrible | Yes |
+| tal-reverb | Reverb | Yes, but clips | Yes, but clips | Yes |
 | vex | Decent polysynth | Yes | Yes but sounds terrible | Runs but UI does not update correctly |
 | wolpertinger | Weird noise making synth | Yes | Yes | Yes |
 | unit_testing | Tests | No | N/A | N/A |

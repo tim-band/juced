@@ -178,7 +178,7 @@ int PresetManager::save(void)
     xmlDefault->addChildElement(textElement);
     xmlRoot.addChildElement(xmlDefault);
 
-    for (int i = 0; i < preset.size(); i++)
+    for (unsigned int i = 0; i < preset.size(); i++)
     {
         XmlElement* xmlPreset = paramPresetToXML(preset[i], i + 1);
         xmlRoot.addChildElement(xmlPreset);

@@ -166,7 +166,7 @@ int SampleData::loadSingleFile(String filename, int num)
     }
 
     checkLength(reader->lengthInSamples);
-    float *sampleData;
+    float *sampleData = samplesRR;
     switch (num)
     {
     case 0:
@@ -177,9 +177,6 @@ int SampleData::loadSingleFile(String filename, int num)
         break;
     case 2:
         sampleData = samplesRL;
-        break;
-    case 3:
-        sampleData = samplesRR;
         break;
     }
 
@@ -561,7 +558,7 @@ void SampleData::applySingleTimbre(HConvSingle *hcSingle,
     if (len < 2 * flen)
     {
         int size = len * sizeof(float);
-        memcpy(out, in, len);
+        memcpy(out, in, size);
         return;
     }
 

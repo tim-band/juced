@@ -301,7 +301,7 @@ static int fluid_settings_set(fluid_settings_t* settings,
 
 /** returns 1 if the value has been registered correctly, 0
     otherwise */
-int fluid_settings_register_str(fluid_settings_t* settings, char* name, char* def, int hints,
+int fluid_settings_register_str(fluid_settings_t* settings, const char* name, char* def, int hints,
 			       fluid_str_update_t fun, void* data)
 {
   int type;
@@ -335,7 +335,7 @@ int fluid_settings_register_str(fluid_settings_t* settings, char* name, char* de
 
 /** returns 1 if the value has been register correctly, zero
     otherwise */
-int fluid_settings_register_num(fluid_settings_t* settings, char* name, double def,
+int fluid_settings_register_num(fluid_settings_t* settings, const char* name, double def,
 			       double min, double max, int hints,
 			       fluid_num_update_t fun, void* data)
 {
@@ -375,7 +375,7 @@ int fluid_settings_register_num(fluid_settings_t* settings, char* name, double d
 
 /** returns 1 if the value has been register correctly, zero
     otherwise */
-int fluid_settings_register_int(fluid_settings_t* settings, char* name, int def,
+int fluid_settings_register_int(fluid_settings_t* settings, const char* name, int def,
 			       int min, int max, int hints,
 			       fluid_int_update_t fun, void* data)
 {
@@ -413,7 +413,7 @@ int fluid_settings_register_int(fluid_settings_t* settings, char* name, int def,
   }
 }
 
-int fluid_settings_get_type(fluid_settings_t* settings, char* name)
+int fluid_settings_get_type(fluid_settings_t* settings, const char* name)
 {
   int type;
   void* value;
@@ -426,7 +426,7 @@ int fluid_settings_get_type(fluid_settings_t* settings, char* name)
   return (fluid_settings_get(settings, tokens, ntokens, &value, &type))? type : FLUID_NO_TYPE;
 }
 
-int fluid_settings_get_hints(fluid_settings_t* settings, char* name)
+int fluid_settings_get_hints(fluid_settings_t* settings, const char* name)
 {
   int type;
   void* value;
@@ -451,7 +451,7 @@ int fluid_settings_get_hints(fluid_settings_t* settings, char* name)
   }
 }
 
-int fluid_settings_is_realtime(fluid_settings_t* settings, char* name)
+int fluid_settings_is_realtime(fluid_settings_t* settings, const char* name)
 {
   int type;
   void* value;
@@ -515,7 +515,7 @@ int fluid_settings_setstr(fluid_settings_t* settings, const char* name, const ch
   }
 }
 
-int fluid_settings_getstr(fluid_settings_t* settings, char* name, char** str)
+int fluid_settings_getstr(fluid_settings_t* settings, const char* name, char** str)
 {
   int type;
   void* value;
@@ -535,7 +535,7 @@ int fluid_settings_getstr(fluid_settings_t* settings, char* name, char** str)
   return 0;
 }
 
-int fluid_settings_str_equal(fluid_settings_t* settings, char* name, char* s)
+int fluid_settings_str_equal(fluid_settings_t* settings, const char* name, const char* s)
 {
   int type;
   void* value;
@@ -554,7 +554,7 @@ int fluid_settings_str_equal(fluid_settings_t* settings, char* name, char* s)
 }
 
 char*
-fluid_settings_getstr_default(fluid_settings_t* settings, char* name)
+fluid_settings_getstr_default(fluid_settings_t* settings, const char* name)
 {
   int type;
   void* value;
@@ -573,7 +573,7 @@ fluid_settings_getstr_default(fluid_settings_t* settings, char* name)
   }
 }
 
-int fluid_settings_add_option(fluid_settings_t* settings, char* name, char* s)
+int fluid_settings_add_option(fluid_settings_t* settings, const char* name, char* s)
 {
   int type;
   void* value;
@@ -594,7 +594,7 @@ int fluid_settings_add_option(fluid_settings_t* settings, char* name, char* s)
   }
 }
 
-int fluid_settings_remove_option(fluid_settings_t* settings, char* name, char* s)
+int fluid_settings_remove_option(fluid_settings_t* settings, const char* name, char* s)
 {
   int type;
   void* value;
@@ -626,7 +626,7 @@ int fluid_settings_remove_option(fluid_settings_t* settings, char* name, char* s
   }
 }
 
-int fluid_settings_setnum(fluid_settings_t* settings, char* name, double val)
+int fluid_settings_setnum(fluid_settings_t* settings, const char* name, double val)
 {
   int type;
   void* value;
@@ -668,7 +668,7 @@ int fluid_settings_setnum(fluid_settings_t* settings, char* name, double val)
   }
 }
 
-int fluid_settings_getnum(fluid_settings_t* settings, char* name, double* val)
+int fluid_settings_getnum(fluid_settings_t* settings, const char* name, double* val)
 {
   int type;
   void* value;
@@ -688,7 +688,7 @@ int fluid_settings_getnum(fluid_settings_t* settings, char* name, double* val)
 }
 
 
-void fluid_settings_getnum_range(fluid_settings_t* settings, char* name, double* min, double* max)
+void fluid_settings_getnum_range(fluid_settings_t* settings, const char* name, double* min, double* max)
 {
   int type;
   void* value;
@@ -707,7 +707,7 @@ void fluid_settings_getnum_range(fluid_settings_t* settings, char* name, double*
 }
 
 double
-fluid_settings_getnum_default(fluid_settings_t* settings, char* name)
+fluid_settings_getnum_default(fluid_settings_t* settings, const char* name)
 {
   int type;
   void* value;
@@ -727,7 +727,7 @@ fluid_settings_getnum_default(fluid_settings_t* settings, char* name)
 }
 
 
-int fluid_settings_setint(fluid_settings_t* settings, char* name, int val)
+int fluid_settings_setint(fluid_settings_t* settings, const char* name, int val)
 {
   int type;
   void* value;
@@ -769,7 +769,7 @@ int fluid_settings_setint(fluid_settings_t* settings, char* name, int val)
   }
 }
 
-int fluid_settings_getint(fluid_settings_t* settings, char* name, int* val)
+int fluid_settings_getint(fluid_settings_t* settings, const char* name, int* val)
 {
   int type;
   void* value;
@@ -789,7 +789,7 @@ int fluid_settings_getint(fluid_settings_t* settings, char* name, int* val)
 }
 
 
-void fluid_settings_getint_range(fluid_settings_t* settings, char* name, int* min, int* max)
+void fluid_settings_getint_range(fluid_settings_t* settings, const char* name, int* min, int* max)
 {
   int type;
   void* value;
@@ -808,7 +808,7 @@ void fluid_settings_getint_range(fluid_settings_t* settings, char* name, int* mi
 }
 
 int
-fluid_settings_getint_default(fluid_settings_t* settings, char* name)
+fluid_settings_getint_default(fluid_settings_t* settings, const char* name)
 {
   int type;
   void* value;
@@ -830,7 +830,7 @@ fluid_settings_getint_default(fluid_settings_t* settings, char* name)
 
 
 
-void fluid_settings_foreach_option(fluid_settings_t* settings, char* name, void* data,
+void fluid_settings_foreach_option(fluid_settings_t* settings, const char* name, void* data,
 				  fluid_settings_foreach_option_t func)
 {
   int type;

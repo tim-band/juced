@@ -147,8 +147,8 @@ Image* juce_loadPNGImageFromStream (InputStream& in)
         // read the header..
         png_set_read_fn (pngReadStruct, &in, pngReadCallback);
 
-        png_uint_32 width, height;
-        int bitDepth, colorType, interlaceType;
+        png_uint_32 width = 0, height = 0;
+        int bitDepth = 0, colorType = 0, interlaceType = 0;
 
         png_read_info (pngReadStruct, pngInfoStruct);
 
