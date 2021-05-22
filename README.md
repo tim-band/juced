@@ -58,10 +58,10 @@ Run them from the `bin/linux` directory.
 | capsaicin | Additive synth | Runs but no sound | Yes | Yes |
 | drumsynth | Drum Synthesizer | Yes | Yes | Yes |
 | dubdelay | Mad delay | N/A | Yes | Yes |
-| eqinox | 6-band parametric equalizer | Yes | UI segfaults | Runs, but UI doesn't work |
+| eqinox | 6-band parametric equalizer | Yes | Yes | Yes |
 | helix | Synth with brutalist UX | Yes | Yes | Yes |
-| hybridreverb2 | Reverb | Runs, but what are these files it wants? | | |
-| implzr | Impulse reverb (uses .wav files) | Yes? | | UI works once |
+| hybridreverb2 | Reverb | Runs, but what are these files it wants? | | Fails to scan |
+| implzr | Impulse reverb (uses .wav files) | Yes? | | Yes? |
 | jacked | | Runs, but just a blank screen | N/A | N/A |
 | jost | VST host | Yes | N/A | N/A |
 | kombat | No idea | N/A? | N/A? Doesn't recognize it as a plugin | N/A |
@@ -72,6 +72,6 @@ Run them from the `bin/linux` directory.
 | soundcrab | Soundfont player | Runs, but just drones | | |
 | tal-filter | | runs, but sounds terrible | runs, sounds terrible | Yes |
 | tal-reverb | Reverb | Yes, but clips | Yes, but clips | Yes |
-| vex | Decent polysynth | Yes | Yes but sounds terrible | Runs but UI does not update correctly |
+| vex | Decent polysynth | Yes | Yes but sounds terrible | Yes |
 | wolpertinger | Weird noise making synth | Yes | Yes | Yes |
 | unit_testing | Tests | No | N/A | N/A |

@@ -34,6 +34,7 @@ function generic_configuration(name, basedir)
 
     --filter { "system:linux" }
     configuration "linux"
+        defines { "JUCE_LINUX" }
         targetdir (basedir .. "linux")
         buildoptions { "-fPIC", "-fvisibility=hidden" }
 
@@ -44,6 +45,7 @@ function generic_configuration(name, basedir)
 
     --filter { "system:macosx" }
     configuration "macosx"
+        defines { "JUCE_MAC=1" }
         targetdir (basedir .. "macosx")
 
     --filter { "configurations:Debug or Release" }
@@ -57,7 +59,7 @@ function generic_configuration(name, basedir)
     --filter { "configurations:Debug" }
     configuration "Debug"
         targetsuffix "_debug"
-        defines { "DEBUG=1", "_DEBUG=1" }
+        defines { "DEBUG=1", "_DEBUG=1", "JUCE_DEBUG=1" }
         --symbols "On"
         flags { "Symbols" }
 

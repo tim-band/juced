@@ -43,13 +43,9 @@ static Atom   atom_TARGETS;
 //==============================================================================
 static void initSelectionAtoms()
 {
-    static bool isInitialised = false;
-    if (! isInitialised)
-    {
-        atom_UTF8_STRING = XInternAtom (display, "UTF8_STRING", False);
-        atom_CLIPBOARD   = XInternAtom (display, "CLIPBOARD", False);
-        atom_TARGETS     = XInternAtom (display, "TARGETS", False);
-    }
+    atom_UTF8_STRING = XInternAtom (display, "UTF8_STRING", False);
+    atom_CLIPBOARD   = XInternAtom (display, "CLIPBOARD", False);
+    atom_TARGETS     = XInternAtom (display, "TARGETS", False);
 }
 
 //==============================================================================

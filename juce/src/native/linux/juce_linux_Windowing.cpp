@@ -2317,44 +2317,37 @@ private:
 
     void createWindow()
     {
-        static bool atomsInitialised = false;
+        wm_Protocols                      = XInternAtom (display, "WM_PROTOCOLS", 1);
+        wm_ProtocolList [TAKE_FOCUS]      = XInternAtom (display, "WM_TAKE_FOCUS", 1);
+        wm_ProtocolList [DELETE_WINDOW]   = XInternAtom (display, "WM_DELETE_WINDOW", 1);
+        wm_ChangeState                    = XInternAtom (display, "WM_CHANGE_STATE", 1);
+        wm_State                          = XInternAtom (display, "WM_STATE", 1);
+        wm_ActiveWin                      = XInternAtom (display, "_NET_ACTIVE_WINDOW", False);
 
-        if (! atomsInitialised)
-        {
-            atomsInitialised = true;
+        XA_XdndAware                      = XInternAtom (display, "XdndAware", 0);
+        XA_XdndEnter                      = XInternAtom (display, "XdndEnter", 0);
+        XA_XdndLeave                      = XInternAtom (display, "XdndLeave", 0);
+        XA_XdndPosition                   = XInternAtom (display, "XdndPosition", 0);
+        XA_XdndStatus                     = XInternAtom (display, "XdndStatus", 0);
+        XA_XdndDrop                       = XInternAtom (display, "XdndDrop", 0);
+        XA_XdndFinished                   = XInternAtom (display, "XdndFinished", 0);
+        XA_XdndSelection                  = XInternAtom (display, "XdndSelection", 0);
+        XA_XdndProxy                      = XInternAtom (display, "XdndProxy", 0);
 
-            wm_Protocols                      = XInternAtom (display, "WM_PROTOCOLS", 1);
-            wm_ProtocolList [TAKE_FOCUS]      = XInternAtom (display, "WM_TAKE_FOCUS", 1);
-            wm_ProtocolList [DELETE_WINDOW]   = XInternAtom (display, "WM_DELETE_WINDOW", 1);
-            wm_ChangeState                    = XInternAtom (display, "WM_CHANGE_STATE", 1);
-            wm_State                          = XInternAtom (display, "WM_STATE", 1);
-            wm_ActiveWin                      = XInternAtom (display, "_NET_ACTIVE_WINDOW", False);
+        XA_XdndTypeList                   = XInternAtom (display, "XdndTypeList", 0);
+        XA_XdndActionList                 = XInternAtom (display, "XdndActionList", 0);
+        XA_XdndActionCopy                 = XInternAtom (display, "XdndActionCopy", 0);
+        XA_XdndActionMove                 = XInternAtom (display, "XdndActionMove", 0);
+        XA_XdndActionLink                 = XInternAtom (display, "XdndActionLink", 0);
+        XA_XdndActionAsk                  = XInternAtom (display, "XdndActionAsk", 0);
+        XA_XdndActionPrivate              = XInternAtom (display, "XdndActionPrivate", 0);
+        XA_XdndActionDescription          = XInternAtom (display, "XdndActionDescription", 0);
 
-            XA_XdndAware                      = XInternAtom (display, "XdndAware", 0);
-            XA_XdndEnter                      = XInternAtom (display, "XdndEnter", 0);
-            XA_XdndLeave                      = XInternAtom (display, "XdndLeave", 0);
-            XA_XdndPosition                   = XInternAtom (display, "XdndPosition", 0);
-            XA_XdndStatus                     = XInternAtom (display, "XdndStatus", 0);
-            XA_XdndDrop                       = XInternAtom (display, "XdndDrop", 0);
-            XA_XdndFinished                   = XInternAtom (display, "XdndFinished", 0);
-            XA_XdndSelection                  = XInternAtom (display, "XdndSelection", 0);
-            XA_XdndProxy                      = XInternAtom (display, "XdndProxy", 0);
+        XA_JXSelectionWindowProperty      = XInternAtom (display, "JXSelectionWindowProperty", 0);
 
-            XA_XdndTypeList                   = XInternAtom (display, "XdndTypeList", 0);
-            XA_XdndActionList                 = XInternAtom (display, "XdndActionList", 0);
-            XA_XdndActionCopy                 = XInternAtom (display, "XdndActionCopy", 0);
-            XA_XdndActionMove                 = XInternAtom (display, "XdndActionMove", 0);
-            XA_XdndActionLink                 = XInternAtom (display, "XdndActionLink", 0);
-            XA_XdndActionAsk                  = XInternAtom (display, "XdndActionAsk", 0);
-            XA_XdndActionPrivate              = XInternAtom (display, "XdndActionPrivate", 0);
-            XA_XdndActionDescription          = XInternAtom (display, "XdndActionDescription", 0);
-
-            XA_JXSelectionWindowProperty      = XInternAtom (display, "JXSelectionWindowProperty", 0);
-
-            XA_MimeTextPlain                  = XInternAtom (display, "text/plain", 0);
-            XA_MimeTextUriList                = XInternAtom (display, "text/uri-list", 0);
-            XA_MimeRootDrop                   = XInternAtom (display, "application/x-rootwindow-drop", 0);
-        }
+        XA_MimeTextPlain                  = XInternAtom (display, "text/plain", 0);
+        XA_MimeTextUriList                = XInternAtom (display, "text/uri-list", 0);
+        XA_MimeRootDrop                   = XInternAtom (display, "application/x-rootwindow-drop", 0);
 
         resetDragAndDrop();
 

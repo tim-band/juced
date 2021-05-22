@@ -320,7 +320,8 @@ const Colour Colours::findColourForName (const String& colourName,
         0xe1b5130f, 0xff9acd32  /* yellowgreen */
     };
 
-    const int hash = colourName.trim().toLowerCase().hashCode();
+    const unsigned int hash = static_cast<unsigned int>(
+        colourName.trim().toLowerCase().hashCode());
 
     for (int i = 0; i < numElementsInArray (presets); i += 2)
         if (presets [i] == hash)

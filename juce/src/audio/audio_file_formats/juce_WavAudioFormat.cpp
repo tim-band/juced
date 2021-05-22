@@ -230,8 +230,6 @@ public:
         {
             const uint32 len = (uint32) input->readInt();
             const int64 end = input->getPosition() + len;
-            bool hasGotType = false;
-            bool hasGotData = false;
 
             if (input->readInt() == chunkName ("WAVE"))
             {
@@ -258,8 +256,6 @@ public:
                             usesFloatingPointData = true;
                         else if (format != 1)
                             bytesPerFrame = 0;
-
-                        hasGotType = true;
                     }
                     else if (chunkType == chunkName ("data"))
                     {
@@ -267,8 +263,6 @@ public:
                         dataLength = length;
                         dataChunkStart = input->getPosition();
                         lengthInSamples = (bytesPerFrame > 0) ? (dataLength / bytesPerFrame) : 0;
-
-                        hasGotData = true;
                     }
                     else if (chunkType == chunkName ("bext"))
                     {

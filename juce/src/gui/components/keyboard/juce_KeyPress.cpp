@@ -54,22 +54,6 @@ KeyPress::KeyPress (const int keyCode_) throw()
 {
 }
 
-KeyPress::KeyPress (const KeyPress& other) throw()
-    : keyCode (other.keyCode),
-      mods (other.mods),
-      textCharacter (other.textCharacter)
-{
-}
-
-const KeyPress& KeyPress::operator= (const KeyPress& other) throw()
-{
-    keyCode = other.keyCode;
-    mods = other.mods;
-    textCharacter = other.textCharacter;
-
-    return *this;
-}
-
 bool KeyPress::operator== (const KeyPress& other) const throw()
 {
     return mods.getRawFlags() == other.mods.getRawFlags()

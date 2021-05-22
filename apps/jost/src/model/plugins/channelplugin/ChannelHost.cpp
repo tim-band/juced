@@ -510,10 +510,10 @@ void ChannelHost::loadFromXml (XmlElement* xml)
 	// remove already added plugins
     closeAllPlugins (false);
 
-    if (plugins.contains (inputPlugin));
+    if (plugins.contains (inputPlugin))
         plugins.removeObject (inputPlugin, false);
 
-    if (plugins.contains (outputPlugin));
+    if (plugins.contains (outputPlugin))
         plugins.removeObject (outputPlugin, false);
 
     // start adding stuff
