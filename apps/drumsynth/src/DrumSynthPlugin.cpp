@@ -118,6 +118,9 @@ void DrumSynthPlugin::processBlock (AudioSampleBuffer& buffer,
     buffer.clear ();
     buffer.addFrom (0, 0, output, 0, 0, blockSamples, 2.0f);
     buffer.addFrom (1, 0, output, 0, 0, blockSamples, 2.0f);
+
+    // get rid of MIDI messages from the keyboard
+    midiMessages.clear();
 }
 
 //==============================================================================
