@@ -575,9 +575,12 @@ public:
     XBitmapImage (const PixelFormat format_, const int w, const int h,
                   const bool clearImage, const bool is16Bit_)
         : Image (format_, w, h),
-          is16Bit (is16Bit_)
+          is16Bit (is16Bit_),
+          gc(0)
     {
         jassert (format_ == RGB || format_ == ARGB);
+
+        gc = DefaultGC (display, DefaultScreen (display));
 
         pixelStride = (format_ == RGB) ? 3 : 4;
         lineStride = ((w * pixelStride + 3) & ~3);
@@ -701,11 +704,6 @@ public:
 
     void blitToWindow (Window window, int dx, int dy, int dw, int dh, int sx, int sy)
     {
-        static GC gc = 0;
-
-        if (gc == 0)
-            gc = DefaultGC (display, DefaultScreen (display));
-
         if (is16Bit)
         {
             const uint32 rMask = xImage->red_mask;
@@ -752,6 +750,7 @@ public:
 private:
     XImage* xImage;
     const bool is16Bit;
+    GC gc;
     HeapBlock <char> imageData16Bit;
 
 #if JUCE_USE_XSHM
@@ -1914,7 +1913,11 @@ private:
 
         void timerCallback()
         {
-            if (! regionsNeedingRepaint.isEmpty() && shmCompletedDrawing)
+            if (! regionsNeedingRepaint.isEmpty()
+#if JUCE_USE_XSHM
+                && shmCompletedDrawing
+#endif
+            )
             {
                 stopTimer();
                 performAnyPendingRepaintsNow();
@@ -1973,8 +1976,9 @@ private:
 
                 if (! totalArea.isEmpty())
                 {
+#if JUCE_USE_XSHM
                     shmCompletedDrawing = false;
-
+#endif
                     if (image == 0 || image->getWidth() < totalArea.getWidth()
                             || image->getHeight() < totalArea.getHeight())
                     {

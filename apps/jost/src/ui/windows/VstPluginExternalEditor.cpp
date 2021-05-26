@@ -275,14 +275,11 @@ void VstPluginExternalEditor::showGUI(bool bVisible)
     {
 		if (bVisible)
 		{
-			if (vstGuiWindow)
-			{
 				vstGuiWindow->setSize(editorWidth, editorHeight);
 				plugin->openEditor (handle, (void*) 0);        
 				repaint();
 				vstGuiWindow->repaint();
 			}
-		}
 		else
 		{
 			vstGuiWindow->setSize(0, 0);
