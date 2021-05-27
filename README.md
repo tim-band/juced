@@ -19,7 +19,7 @@ libfreetype-dev libx11-dev libxext-dev libxi-dev libxinerama-dev \
 libglu1-mesa-dev libgl-dev dssi-dev
 ```
 
-Possibly lash and sqlite need installing as well for some effects.
+Possibly lash and sqlite need installing as well for some configurations.
 
 ### Build ###
 

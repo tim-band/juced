@@ -37,6 +37,7 @@ function generic_configuration(name, basedir)
         defines { "JUCE_LINUX" }
         targetdir (basedir .. "linux")
         buildoptions { "-fPIC", "-fvisibility=hidden" }
+        --visibility { "Hidden" }
 
     --filter { "system:windows" }
     configuration "windows"
@@ -68,9 +69,6 @@ function generic_configuration(name, basedir)
         defines { "NDEBUG=1" }
         --optimize "On"
         flags { "NoFramePointer", "OptimizeSpeed" }
-        --visibility { "Hidden" }
-    --configuration { "Release", "gcc" }
-        --buildoptions { "-fvisibility=hidden" }
     end
 
 --======================================================================================
@@ -119,13 +117,15 @@ function configure_standard_options (link_with_libraries)
     configuration "Debug"
         flags { "NoPCH" }
 
-    --filter { "action:gmake*" }
-    configuration"gmake*"
+    configuration {}
 
     newoption {
         trigger = "enable-scripting",
         description = "Disable scripting support (doesn't work)"
     }
+
+    configuration "linux"
+
     newoption {
         trigger = "disable-alsa",
         description = "Disable ALSA support (this will disable also midi)"
@@ -168,69 +168,51 @@ function configure_standard_options (link_with_libraries)
     configuration { "enable-scripting" }
         defines { "JUCE_SUPPORT_SCRIPTING=1" }
  
-    configuration { "gmake*", "not disable-xshm" }
-    if (os.isfile ("/usr/include/X11/extensions/XShm.h")) then
+    configuration { "linux", "not disable-xshm" }
         defines { "JUCE_USE_XSHM=1" }
-        if link_with_libraries then
-        end
-    end
 
-    configuration { "gmake*", "enable-xinerama" }
-    if (os.findlib ("Xinerama")) then
+    configuration { "linux", "enable-xinerama" }
         defines { "JUCE_USE_XINERAMA=1" }
         if link_with_libraries then
         end
-    end
 
-    configuration { "gmake*", "enable-opengl or enable-glx" }
-    if (os.findlib ("GL") and os.findlib ("GLU")) then
+    configuration { "linux", "enable-opengl or enable-glx" }
         defines { "JUCE_OPENGL=1" }
         if link_with_libraries then
             links { "GL", "GLU" }
         end        
 
-        configuration { "gmake*", "enable-glx" }
+    configuration { "linux", "enable-glx" }
         defines { "JUCE_USE_GLX=1" }
         if link_with_libraries then
             links { "Xrender", "Xi" }
         end
-    end
 
-    configuration { "gmake*", "enable-sqlite" }
-    if (os.findlib ("sqlite3")) then
+    configuration { "linux", "enable-sqlite" }
         defines { "JUCE_SUPPORT_SQLITE=1" }
         if link_with_libraries then
             links { "sqlite3" }
         end
-    end
 
     -- enable these only if we are in standalone mode
-    configuration { "gmake*", "not disable-alsa", "not SharedLib" }
-    if (os.isfile ("/usr/include/alsa/asoundlib.h")
-        and os.findlib ("asound")) then
+    configuration { "linux", "not disable-alsa", "not SharedLib" }
         defines { "JUCE_ALSA=1" }
         if link_with_libraries then
             links { "asound" }
         end
-    end
 
-    configuration { "gmake*", "not disable-jack", "not SharedLib" }
-    if (os.findlib ("jack")) then
+    configuration { "linux", "not disable-jack", "not SharedLib" }
         defines { "JUCE_JACK=1" }
         if link_with_libraries then
             links { "jack" }
         end
-    end
 
-    configuration { "gmake*", "enable-lash", "not SharedLib" }
-    if (os.isfile ("/usr/include/lash-1.0/lash/lash.h")
-        and os.findlib ("lash")) then
+    configuration { "linux", "enable-lash", "not SharedLib" }
         defines { "JUCE_LASH=1" }
         includedirs { "/usr/include/lash-1.0" }
         if link_with_libraries then
             links { "lash" }
         end
-    end
 end
 
 --======================================================================================
@@ -268,23 +250,20 @@ function configure_jost_libraries (standalone)
         }
 
     configuration { "linux", "not disable-ladspa" }
-        if (os.isfile ("/usr/include/ladspa.h")) then
-            defines { "JOST_USE_LADSPA=1" }
-            print ("...enabled LADSPA support")
-        else
-            defines { "JOST_USE_LADSPA=0" }
-        end
+        defines { "JOST_USE_LADSPA=1" }
+
+    configuration { "linux", "disable-ladspa" }
+        defines { "JOST_USE_LADSPA=0" }
 
     configuration { "linux", "not disable-dssi" }
-        if (os.isfile ("/usr/include/dssi.h")) then
-            defines { "JOST_USE_DSSI=1" }
-            print ("...enabled DSSI support")
-        else
-            defines { "JOST_USE_DSSI=0" }
-        end
+        defines { "JOST_USE_DSSI=1" }
+
+    configuration { "linux", "disable-dssi" }
+        defines { "JOST_USE_DSSI=0" }
 
     configuration { "enable-jackbridge" }
         defines { "JOST_USE_JACKBRIDGE=1" }
+
     configuration { "not enable-jackbridge" }
         defines { "JOST_USE_JACKBRIDGE=0" }
     
