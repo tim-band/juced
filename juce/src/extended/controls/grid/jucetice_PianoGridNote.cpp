@@ -27,11 +27,12 @@
 
 #include "../../../core/juce_StandardHeader.h"
 
+#include <algorithm>
+
 BEGIN_JUCE_NAMESPACE
 
 #include "jucetice_PianoGridNote.h"
 #include "jucetice_PianoGrid.h"
-
 
 //==============================================================================
 MidiGridItem::MidiGridItem ()
@@ -46,7 +47,7 @@ MidiGridItem::~MidiGridItem ()
 }
 
 //==============================================================================
-void MidiGridItem::startDragging (const MouseEvent& e)
+void MidiGridItem::startDragging (const MouseEvent&)
 {
     isDragging = true;
 
@@ -61,7 +62,7 @@ void MidiGridItem::continueDragging (const MouseEvent& e)
     dragger.dragComponent (this, e);
 }
 
-void MidiGridItem::endDragging (const MouseEvent& e)
+void MidiGridItem::endDragging (const MouseEvent&)
 {
     isDragging = false;
     repaint ();
@@ -127,7 +128,7 @@ void PianoGridNote::continueDragging (const MouseEvent& e)
 }
 
 //==============================================================================
-void PianoGridNote::startResizing (const MouseEvent& e)
+void PianoGridNote::startResizing (const MouseEvent&)
 {
     isResizing = true;
 
@@ -154,14 +155,14 @@ void PianoGridNote::continueResizing (const MouseEvent& e)
     }
 }
 
-void PianoGridNote::endResizing (const MouseEvent& e)
+void PianoGridNote::endResizing (const MouseEvent&)
 {
     isResizing = false;
     repaint ();
 }
 
 //==============================================================================
-void PianoGridNote::startVelocity (const MouseEvent& e)
+void PianoGridNote::startVelocity (const MouseEvent&)
 {
     isEditingVelocity = true;
 
@@ -182,7 +183,7 @@ void PianoGridNote::continueVelocity (const MouseEvent& e)
     }
 }
 
-void PianoGridNote::endVelocity (const MouseEvent& e)
+void PianoGridNote::endVelocity (const MouseEvent&)
 {
     isEditingVelocity = false;
 
@@ -511,7 +512,7 @@ void AutomationEvent::paint (Graphics& g)
 	
 	if (hasBeenSelected) 
 	{
-		fillColour = fillColour.darker (0.6);
+		fillColour = fillColour.darker (0.6f);
 		borderColour = borderColour.darker ();
 		borderWidth = 2;
 	}

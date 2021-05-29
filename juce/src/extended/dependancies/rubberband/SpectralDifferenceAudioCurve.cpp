@@ -52,7 +52,7 @@ SpectralDifferenceAudioCurve::setWindowSize(size_t newSize)
 }
 
 float
-SpectralDifferenceAudioCurve::process(const float *R__ mag, size_t increment)
+SpectralDifferenceAudioCurve::process(const float *R__ mag, size_t)
 {
     float result = 0.0;
 

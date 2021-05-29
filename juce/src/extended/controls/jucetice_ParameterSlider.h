@@ -54,17 +54,17 @@ public:
     }
 
     //==============================================================================
-    void parameterChanged (AudioParameter* newParameter, const int index)
+    void parameterChanged (AudioParameter* newParameter, const int)
     {
         setValue (newParameter->getValueMapped (), false);
     }
 
-    void attachedToParameter (AudioParameter* newParameter, const int index)
+    void attachedToParameter (AudioParameter* newParameter, const int)
     {
         parameter = newParameter;
     }
 
-    void detachedFromParameter (AudioParameter* newParameter, const int index)
+    void detachedFromParameter (AudioParameter* newParameter, const int)
     {
         if (newParameter == parameter)
             parameter = 0;

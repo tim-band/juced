@@ -16,6 +16,10 @@
 
 #include "Profiler.h"
 
+#if defined _WIN32 && !(defined _USE_MATH_DEFINES)
+#define _USE_MATH_DEFINES
+#endif
+
 #include <cmath>
 
 

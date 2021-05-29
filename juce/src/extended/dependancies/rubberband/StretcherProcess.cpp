@@ -12,6 +12,15 @@
     COPYING included with this distribution for more information.
 */
 
+#ifdef _WIN32
+#define NOMINMAX
+#ifndef _USE_MATH_DEFINES
+#define _USE_MATH_DEFINES
+#endif
+#else
+#define BOOL bool
+#endif
+
 #include "StretcherImpl.h"
 #include "PercussiveAudioCurve.h"
 #include "HighFrequencyAudioCurve.h"
@@ -21,6 +30,7 @@
 #include "Resampler.h"
 #include "Profiler.h"
 
+#include <algorithm>
 #include <cassert>
 #include <cmath>
 #include <set>
@@ -150,7 +160,7 @@ RubberBandStretcher::Impl::consumeChannel(size_t c, const float *input,
         toWrite = cd.resampler->resample(&input,
                                          &cd.resamplebuf,
                                          samples,
-                                         1.0 / m_pitchScale,
+                                         (float) (1.0 / m_pitchScale),
                                          final);
 
     }
@@ -662,7 +672,7 @@ RubberBandStretcher::Impl::modifyChunk(size_t channel,
     bool unchanged = cd.unchanged && (outputIncrement == m_increment);
     bool fullReset = phaseReset;
     bool laminar = !(m_options & OptionPhaseIndependent);
-    bool bandlimited = (m_options & OptionTransientsMixed);
+    BOOL bandlimited = (m_options & OptionTransientsMixed);
     int bandlow = lrint((150 * sz * cd.oversample) / rate);
     int bandhigh = lrint((1000 * sz * cd.oversample) / rate);
 
@@ -671,7 +681,7 @@ RubberBandStretcher::Impl::modifyChunk(size_t channel,
     float freq2 = m_freq2;
 
     if (laminar) {
-        float r = getEffectiveRatio();
+        float r = (float) getEffectiveRatio();
         if (r > 1) {
             float rf0 = 600 + (600 * ((r-1)*(r-1)*(r-1)*2));
             float f1ratio = freq1 / freq0;
@@ -984,7 +994,7 @@ RubberBandStretcher::Impl::writeChunk(size_t channel, size_t shiftIncrement, boo
         size_t outframes = cd.resampler->resample(&cd.accumulator,
                                                   &cd.resamplebuf,
                                                   si,
-                                                  1.0 / m_pitchScale,
+                                                  (float) (1.0 / m_pitchScale),
                                                   last);
 
 
@@ -1037,7 +1047,7 @@ RubberBandStretcher::Impl::writeOutput(RingBuffer<float> &to, float *from, size_
 
     size_t startSkip = 0;
     if (!m_realtime) {
-        startSkip = lrintf((m_windowSize/2) / m_pitchScale);
+        startSkip = lrint((m_windowSize/2) / m_pitchScale);
     }
 
     if (outCount > startSkip) {

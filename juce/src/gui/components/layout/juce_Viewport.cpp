@@ -31,14 +31,11 @@ BEGIN_JUCE_NAMESPACE
 #include "../lookandfeel/juce_LookAndFeel.h"
 
 //==============================================================================
-void ViewportListener::viewedComponentChanged (Viewport* const viewportThatChanged,
-                                               Component* const newViewedComponent)
+void ViewportListener::viewedComponentChanged (Viewport* const, Component* const)
 {
 }
 
-void ViewportListener::visibleAreaChanged (Viewport* const viewportThatChanged,
-                                           int visibleX, int visibleY,
-                                           int visibleW, int visibleH)
+void ViewportListener::visibleAreaChanged (Viewport* const, int, int, int, int)
 {
 }
 

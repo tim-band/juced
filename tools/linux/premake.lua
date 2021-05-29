@@ -272,6 +272,10 @@ function configure_jost_libraries (standalone)
     configuration { "linux", "disable-dssi" }
         defines { "JOST_USE_DSSI=0" }
 
+    configuration { "not linux" }
+        defines { "JOST_USE_LADSPA=0" }
+        defines { "JOST_USE_DSSI=0" }
+
     configuration { "enable-jackbridge" }
         defines { "JOST_USE_JACKBRIDGE=1" }
 

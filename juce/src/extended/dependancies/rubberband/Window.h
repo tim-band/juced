@@ -15,6 +15,10 @@
 #ifndef _RUBBERBAND_WINDOW_H_
 #define _RUBBERBAND_WINDOW_H_
 
+#if defined _WIN32 && !(defined _USE_MATH_DEFINES)
+#define _USE_MATH_DEFINES
+#endif
+
 #include <cmath>
 #include <iostream>
 #include <cstdlib>
@@ -107,25 +111,25 @@ void Window<Type>::encache()
     case BartlettWindow:
 	for (i = 0; i < n/2; ++i) {
 	    mult[i] *= (i / Type(n/2));
-	    mult[i + n/2] *= (1.0 - (i / Type(n/2)));
+	    mult[i + n/2] *= (1.0f - (i / Type(n/2)));
 	}
 	break;
 	    
     case HammingWindow:
-        cosinewin(mult, 0.54, 0.46, 0.0, 0.0);
+        cosinewin(mult, 0.54f, 0.46f, 0.0f, 0.0f);
 	break;
 	    
     case HanningWindow:
-        cosinewin(mult, 0.50, 0.50, 0.0, 0.0);
+        cosinewin(mult, 0.50f, 0.50f, 0.0f, 0.0f);
 	break;
 	    
     case BlackmanWindow:
-        cosinewin(mult, 0.42, 0.50, 0.08, 0.0);
+        cosinewin(mult, 0.42f, 0.50f, 0.08f, 0.0f);
 	break;
 	    
     case GaussianWindow:
 	for (i = 0; i < n; ++i) {
-            mult[i] *= pow(2, - pow((i - (n-1)/2.0) / ((n-1)/2.0 / 3), 2));
+            mult[i] *= pow((Type)2.0f, - pow((i - (n-1)/2.0f) / ((n-1)/2.0f / 3.0f), 2.0f));
 	}
 	break;
 	    
@@ -133,13 +137,13 @@ void Window<Type>::encache()
     {
         int N = n-1;
         for (i = 0; i < N/4; ++i) {
-            Type m = 2 * pow(1.0 - (Type(N)/2 - i) / (Type(N)/2), 3);
+            Type m = 2 * pow(1.0f - (Type(N)/2 - i) / (Type(N)/2), 3);
             mult[i] *= m;
             mult[N-i] *= m;
         }
         for (i = N/4; i <= N/2; ++i) {
             int wn = i - N/2;
-            Type m = 1.0 - 6 * pow(wn / (Type(N)/2), 2) * (1.0 - abs(wn) / (Type(N)/2));
+            Type m = 1.0f - 6 * pow(wn / (Type(N)/2), 2) * (1.0f - abs(wn) / (Type(N)/2));
             mult[i] *= m;
             mult[N-i] *= m;
         }            
@@ -147,11 +151,11 @@ void Window<Type>::encache()
     }
 
     case NuttallWindow:
-        cosinewin(mult, 0.3635819, 0.4891775, 0.1365995, 0.0106411);
+        cosinewin(mult, 0.3635819f, 0.4891775f, 0.1365995f, 0.0106411f);
 	break;
 
     case BlackmanHarrisWindow:
-        cosinewin(mult, 0.35875, 0.48829, 0.14128, 0.01168);
+        cosinewin(mult, 0.35875f, 0.48829f, 0.14128f, 0.01168f);
         break;
     }
 	

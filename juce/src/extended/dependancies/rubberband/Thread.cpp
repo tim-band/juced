@@ -17,8 +17,10 @@
 #include <iostream>
 #include <cstdlib>
 
+#ifndef _WIN32
 #include <sys/time.h>
 #include <time.h>
+#endif
 
 using std::cerr;
 using std::endl;

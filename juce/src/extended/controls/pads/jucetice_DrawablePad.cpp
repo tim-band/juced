@@ -109,7 +109,7 @@ void DrawablePad::setImages (const Drawable* normal,
 
 //==============================================================================
 void DrawablePad::setBackgroundColours (const Colour& toggledOffColour,
-                                        const Colour& toggledOnColour)
+                                        const Colour&)
 {
     if (backgroundOff != toggledOffColour)// || backgroundOn != toggledOnColour)
     {

@@ -54,7 +54,7 @@ MidiPad::~MidiPad()
 }
 
 //==============================================================================
-void MidiPad::paint (Graphics& g)
+void MidiPad::paint (Graphics&)
 {
 }
 //==============================================================================
@@ -64,7 +64,7 @@ void MidiPad::resized()
 }
 
 //==============================================================================
-void MidiPad::buttonClicked(Button* buttonThatWasClicked)
+void MidiPad::buttonClicked(Button*)
 {
 }
 
@@ -105,7 +105,7 @@ bool MidiPad::isInterestedInFileDrag (const StringArray& files)
 }
 
 //==============================================================================
-void MidiPad::filesDropped(const juce::StringArray &filenames, int mouseX, int mouseY) 
+void MidiPad::filesDropped(const juce::StringArray &filenames, int, int) 
 {
     if (isInterestedInFileDrag(filenames)) {
         String filename = filenames.joinIntoString(String::empty,0,1);

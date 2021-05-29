@@ -12,6 +12,13 @@
     COPYING included with this distribution for more information.
 */
 
+#ifdef _WIN32
+#define NOMINMAX
+#ifndef _USE_MATH_DEFINES
+#define _USE_MATH_DEFINES
+#endif
+#endif
+
 #include "StretcherImpl.h"
 #include "PercussiveAudioCurve.h"
 #include "HighFrequencyAudioCurve.h"
@@ -23,6 +30,7 @@
 #include "Resampler.h"
 #include "Profiler.h"
 
+#include <algorithm>
 #include <cassert>
 #include <cmath>
 #include <set>
@@ -562,7 +570,7 @@ RubberBandStretcher::Impl::configure()
             // for resampling; but allocate a sensible amount in case
             // the pitch scale changes during use
             size_t rbs = 
-                lrintf(ceil((m_increment * m_timeRatio * 2) / m_pitchScale));
+                lrint(ceil((m_increment * m_timeRatio * 2) / m_pitchScale));
             if (rbs < m_increment * 16) rbs = m_increment * 16;
             m_channelData[c]->setResampleBufSize(rbs);
         }
@@ -678,7 +686,7 @@ RubberBandStretcher::Impl::reconfigure()
                               m_debugLevel);
 
             m_channelData[c]->setResampleBufSize
-                (lrintf(ceil((m_increment * m_timeRatio * 2) / m_pitchScale)));
+                (lrint(ceil((m_increment * m_timeRatio * 2) / m_pitchScale)));
         }
     }
 

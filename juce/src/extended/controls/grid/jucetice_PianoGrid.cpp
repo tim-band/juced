@@ -27,6 +27,8 @@
 
 #include "../../../core/juce_StandardHeader.h"
 
+#include <algorithm>
+
 BEGIN_JUCE_NAMESPACE
 
 #include "jucetice_PianoGrid.h"
@@ -282,11 +284,11 @@ void MidiGrid::mouseUp (const MouseEvent& e)
         lassoComponent->endLasso ();
 }
 
-void MidiGrid::mouseMove (const MouseEvent& e)
+void MidiGrid::mouseMove (const MouseEvent&)
 {
 }
 
-void MidiGrid::mouseExit (const MouseEvent& e)
+void MidiGrid::mouseExit (const MouseEvent&)
 {
 }
 
@@ -746,11 +748,11 @@ void PianoGrid::mouseUp (const MouseEvent& e)
 	MidiGrid::mouseUp(e);
 }
 
-void PianoGrid::mouseMove (const MouseEvent& e)
+void PianoGrid::mouseMove (const MouseEvent&)
 {
 }
 
-void PianoGrid::mouseExit (const MouseEvent& e)
+void PianoGrid::mouseExit (const MouseEvent&)
 {
 }
 
