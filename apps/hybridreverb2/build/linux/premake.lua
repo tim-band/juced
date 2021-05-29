@@ -6,8 +6,8 @@ includedirs {
     "../../src",
     "../../../../juce",
     "../../../../vst/vstsdk2.4",
-    "../../../../juce/extras/audio\ plugins",
-    "../../../../juce/extras/audio\ plugins/wrapper"
+    "../../../../juce/extras/audio plugins",
+    "../../../../juce/extras/audio plugins/wrapper"
 }
 
 configuration { "Debug" }

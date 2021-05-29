@@ -8,6 +8,8 @@ function make_library_project (name)
 
     solution "juced"
     project (name)
+    targetname (name)
+
     location "."
     configuration {}
     kind "StaticLib"
@@ -16,9 +18,14 @@ function make_library_project (name)
 
     generic_configuration(name, '../../../bin/')
     configure_standard_options (false)
+    if (string.find(os.getversion().description, "Windows")==1)
+    then
+        links { "Qt5Widgets" }
+    else
+        buildoptions { "`pkg-config --cflags Qt5Widgets`" }
+        linkoptions { "`pkg-config --libs Qt5Widgets`" }
+    end
     configuration {}
-    buildoptions { "`pkg-config --cflags Qt5Widgets`" }
-    linkoptions { "`pkg-config --libs Qt5Widgets`" }
 end
 
 function generic_configuration(name, basedir)
@@ -160,7 +167,11 @@ function configure_standard_options (link_with_libraries)
     }
 
     defines { "LINUX=1" }
-    buildoptions { "`pkg-config --cflags freetype2`" }
+    if (string.find(os.getversion().description, "Windows")==1)
+    then
+    else
+        buildoptions { "`pkg-config --cflags freetype2`" }
+    end
 
     links { "rt", "dl", "m", "pthread", "freetype", "X11", "Xext" }
 

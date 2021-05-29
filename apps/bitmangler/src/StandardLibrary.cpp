@@ -36,6 +36,7 @@
 */
 
 
-#ifdef JUCETICE_USE_AMALGAMA #include "StandardConfig.h"
- #include "juce_amalgamated.cpp"#endif
-
+#ifdef JUCETICE_USE_AMALGAMA
+ #include "StandardConfig.h"
+ #include "juce_amalgamated.cpp"
+#endif

@@ -75,3 +75,16 @@ Run them from the `bin/linux` directory.
 | vex | Decent polysynth | Yes | Yes but sounds terrible | Yes |
 | wolpertinger | Weird noise making synth | Yes | Yes | Yes |
 | unit_testing | Tests | No | N/A | N/A |
+
+## Windows ##
+
+### Build ###
+
+```
+premake5 --file=premake4.lua vs2013
+```
+
+...or whichever Visual Studio version you like.
+
+A file `juced.sln` will be produced, which you can open with
+Visual Studio. You can now build the project.

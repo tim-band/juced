@@ -12,13 +12,19 @@
 *.la
 *.a
 
-# Other intermediate files
+# Premake output
 Makefile
 *.make
 /juced.sln
 *.vcproj
+*.vcxproj
+*.vcxproj.filters
 
 # unwanted files
 bin/*
 vst/vstsdk*/
 /.vscode/
+/.vs/
+/juced.opensdf
+/juced.sdf
+/juced.v12.suo
