@@ -18,12 +18,14 @@ function make_library_project (name)
 
     generic_configuration(name, '../../../bin/')
     configure_standard_options (false)
-    if (string.find(os.getversion().description, "Windows")==1)
+    -- stupid way to test if we are building on Windows
+    -- in premake5 we can just say if (os.host()=="windows")
+    if (os.isdir("/usr"))
     then
-        links { "Qt5Widgets" }
-    else
         buildoptions { "`pkg-config --cflags Qt5Widgets`" }
         linkoptions { "`pkg-config --libs Qt5Widgets`" }
+    else
+        links { "Qt5Widgets" }
     end
     configuration {}
 end
@@ -167,9 +169,9 @@ function configure_standard_options (link_with_libraries)
     }
 
     defines { "LINUX=1" }
-    if (string.find(os.getversion().description, "Windows")==1)
+    -- stupid way to test if we are on Windows. Premake5 has os.host() for that
+    if (os.isdir("/usr"))
     then
-    else
         buildoptions { "`pkg-config --cflags freetype2`" }
     end
 
