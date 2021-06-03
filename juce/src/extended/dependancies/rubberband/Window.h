@@ -167,12 +167,13 @@ void Window<Type>::encache()
 template <typename Type>
 void Window<Type>::cosinewin(Type *mult, Type a0, Type a1, Type a2, Type a3)
 {
+    const Type pi((Type)M_PI);
     int n = int(m_size);
     for (int i = 0; i < n; ++i) {
         mult[i] *= (a0
-                    - a1 * cos(2 * M_PI * i / n)
-                    + a2 * cos(4 * M_PI * i / n)
-                    - a3 * cos(6 * M_PI * i / n));
+                    - a1 * cos(2 * pi * i / n)
+                    + a2 * cos(4 * pi * i / n)
+                    - a3 * cos(6 * pi * i / n));
     }
 }
 
