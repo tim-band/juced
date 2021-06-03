@@ -12,12 +12,7 @@
     COPYING included with this distribution for more information.
 */
 
-#ifdef _WIN32
-#define NOMINMAX
-#ifndef _USE_MATH_DEFINES
-#define _USE_MATH_DEFINES
-#endif
-#else
+#ifndef _WIN32
 #define BOOL bool
 #endif
 

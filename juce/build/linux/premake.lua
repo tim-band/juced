@@ -28,6 +28,8 @@ files {
     "../../src/extended/**.h",
 }
 
+includedirs { "../../src/extended/dependancies/ladspa_sdk/src" }
+
 configuration { "linux" }
 files {
     "../../src/native/linux/**.h", 

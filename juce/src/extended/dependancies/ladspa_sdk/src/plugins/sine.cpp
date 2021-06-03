@@ -15,7 +15,7 @@
 
 /*****************************************************************************/
 
-#include <math.h>
+#include <cmath>
 #include <stdlib.h>
 #include <string.h>
 
@@ -44,8 +44,9 @@ LADSPA_Data g_fPhaseStepBase = 0;
 
 inline char * 
 localStrdup(const char * input) {
-  char * output = new char[strlen(input) + 1];
-  strcpy(output, input);
+    size_t n = strlen(input) + 1;
+  char * output = new char[n];
+  strcpy_s(output, n, input);
   return output;
 }
 
@@ -89,6 +90,9 @@ private:
     m_fLimitFrequency(LADSPA_Data(lSampleRate * 0.5)),
     m_fPhaseStepScalar(LADSPA_Data(g_fPhaseStepBase / lSampleRate)) {
   }
+
+  SineOscillator(const SineOscillator&) = delete;
+  SineOscillator &operator=(const SineOscillator&) = delete;
 
   void setPhaseStepFromFrequency(const LADSPA_Data fFrequency) {
     if (fFrequency != m_fCachedFrequency) {

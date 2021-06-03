@@ -159,7 +159,7 @@ void MeterComponent::buildImage(void)
         g.setGradientFill (ColourGradient(m_minColour, 0, 0, m_thresholdColour, w * m_threshold, 0, false));
         g.fillRect(0, 0, int(w * m_threshold), h);
 
-        g.setGradientFill (ColourGradient(m_thresholdColour, int(w * m_threshold), 0, m_maxColour, w, 0, false));
+        g.setGradientFill (ColourGradient(m_thresholdColour, float(w * m_threshold), 0.0f, m_maxColour, float(w), 0.0f, false));
         g.fillRect(int(w * m_threshold), 0, w, h);
 
         if(m_segments)
@@ -178,10 +178,10 @@ void MeterComponent::buildImage(void)
         Graphics g(*m_img);
 
         int hSize = (int)(h * m_threshold);
-        g.setGradientFill (ColourGradient(m_minColour, 0, h, m_thresholdColour, 0, h - hSize, false));
+        g.setGradientFill (ColourGradient(m_minColour, 0.0f, float(h), m_thresholdColour, 0.0f, float(h - hSize), false));
         g.fillRect(0, h - hSize, w, hSize);
 
-        g.setGradientFill (ColourGradient(m_thresholdColour, 0, h - hSize, m_maxColour, 0, 0, false));
+        g.setGradientFill (ColourGradient(m_thresholdColour, 0.0f, float(h - hSize), m_maxColour, 0.0f, 0.0f, false));
         g.fillRect(0, 0, w, h - hSize);
 
         if(m_segments)
@@ -208,7 +208,7 @@ void MeterComponent::buildImage(void)
         double startPos = m_minPosition;    // Start at 10%
         double endPos = m_maxPosition;      // End at 90%
 
-        float strokeWidth = m_segments;     // We get our wiper width from the segments amount
+        float strokeWidth = float(m_segments);     // We get our wiper width from the segments amount
         double pos;
         float radius = jmax (w/2, h/2) - strokeWidth/2;
         float angle;
@@ -219,7 +219,7 @@ void MeterComponent::buildImage(void)
         Path p;
         for(pos = startPos; pos < endPos; pos += .02)
         {
-            angle = left + pos * (right - left);
+            angle = float(left + pos * (right - left));
             x = sin(angle)*radius + w/2;
             y = cos(angle)*radius + h - m_segments;
             if(pos == startPos)
@@ -227,7 +227,7 @@ void MeterComponent::buildImage(void)
             else
                 p.lineTo(x, y);
         }
-        angle = left + pos * (right - left);
+        angle = float(left + pos * (right - left));
         p.lineTo(sin(angle)*radius + w/2, cos(angle)*radius + h - m_segments);
 
         // Create an image brush of our gradient
@@ -237,7 +237,7 @@ void MeterComponent::buildImage(void)
         g2.setGradientFill (ColourGradient(m_minColour, 0, 0, m_thresholdColour, w * m_threshold, 0, false));
         g2.fillRect(0, 0, int(w * m_threshold), h);
 
-        g2.setGradientFill (ColourGradient(m_thresholdColour, int(w * m_threshold), 0, m_maxColour, w, 0, false));
+        g2.setGradientFill (ColourGradient(m_thresholdColour, float(w * m_threshold), 0.0f, m_maxColour, float(w), 0.0f, false));
         g2.fillRect(int(w * m_threshold), 0, w, h);
 
         // Stroke the arc with the gradient
@@ -390,7 +390,7 @@ void MeterComponent::paint (Graphics& g)
         else if(m_img)
             g.drawImage(m_img, m_inset, m_inset, w, h, 0, 0, m_img->getWidth(), m_img->getHeight());
 
-        float angle = 4.71238898 + (m_value * (m_maxPosition - m_minPosition) + m_minPosition) * -3.14159265;
+        float angle = 4.71238898f + (m_value * (m_maxPosition - m_minPosition) + m_minPosition) * -3.14159265f;
         if(m_needleLength)
         {
             g.setColour(m_needleColour);
@@ -399,9 +399,9 @@ void MeterComponent::paint (Graphics& g)
                 m_needleCenter.getY() + m_inset,
                 sin(angle)*m_needleLength + m_needleCenter.getX() + m_inset,
                 cos(angle)*m_needleLength + m_needleCenter.getY() + m_inset,
-                m_needleWidth,
-                m_arrowLength,
-                m_arrowWidth);
+                float(m_needleWidth),
+                float(m_arrowLength),
+                float(m_arrowWidth));
 
             if(m_needleDropShadow)
             {
@@ -441,9 +441,9 @@ void MeterComponent::paint (Graphics& g)
                     m_needleCenter.getY() + m_inset + dropY,
                     sin(angle)*m_needleLength + m_needleCenter.getX() + m_inset + dropPointX,
                     cos(angle)*m_needleLength + m_needleCenter.getY() + m_inset + dropPointY,
-                    m_needleWidth,
-                    m_arrowLength,
-                    m_arrowWidth);
+                    float(m_needleWidth),
+                    float(m_arrowLength),
+                    float(m_arrowWidth));
             }
         }
         else
@@ -451,13 +451,13 @@ void MeterComponent::paint (Graphics& g)
             // Contrasting arrow for built-in analog meter
             g.setColour(m_backgroundColour.contrasting(1.0f).withAlpha(0.9f));
             g.drawArrow(
-                w/2 + m_inset,
-                h - m_segments + m_inset,
+                float(w/2 + m_inset),
+                float(h - m_segments + m_inset),
                 sin(angle)*jmax (w/2, h/2) + w/2 + m_inset,
                 cos(angle)*jmax (w/2, h/2) + h - m_segments + m_inset,
-                m_needleWidth,
-                m_needleWidth*2,
-                m_needleWidth*2);
+                float(m_needleWidth),
+                float(m_needleWidth*2),
+                float(m_needleWidth*2));
         }
 
         if(m_overlay)

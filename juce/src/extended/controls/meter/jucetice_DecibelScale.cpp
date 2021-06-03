@@ -116,22 +116,22 @@ void DecibelScaleComponent::drawLabel (Graphics& g, const int y, const String& l
 
 int DecibelScaleComponent::iecScale (const float dB) const
 {
-    float fDef = 1.0;
+    float fDef = 1.0f;
 
-    if (dB < -70.0)
-        fDef = 0.0;
-    else if (dB < -60.0)
-        fDef = (dB + 70.0) * 0.0025;
-    else if (dB < -50.0)
-        fDef = (dB + 60.0) * 0.005 + 0.025;
-    else if (dB < -40.0)
-        fDef = (dB + 50.0) * 0.0075 + 0.075;
-    else if (dB < -30.0)
-        fDef = (dB + 40.0) * 0.015 + 0.15;
-    else if (dB < -20.0)
-        fDef = (dB + 30.0) * 0.02 + 0.3;
-    else // if (dB < 0.0)
-        fDef = (dB + 20.0) * 0.025 + 0.5;
+    if (dB < -70.0f)
+        fDef = 0.0f;
+    else if (dB < -60.0f)
+        fDef = (dB + 70.0f) * 0.0025f;
+    else if (dB < -50.0f)
+        fDef = (dB + 60.0f) * 0.005f + 0.025f;
+    else if (dB < -40.0f)
+        fDef = (dB + 50.0f) * 0.0075f + 0.075f;
+    else if (dB < -30.0f)
+        fDef = (dB + 40.0f) * 0.015f + 0.15f;
+    else if (dB < -20.0f)
+        fDef = (dB + 30.0f) * 0.02f + 0.3f;
+    else // if (dB < 0.0f)
+        fDef = (dB + 20.0f) * 0.025f + 0.5f;
 
     return (int) (fDef * scale);
 }

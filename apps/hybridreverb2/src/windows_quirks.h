@@ -21,11 +21,6 @@
 
 #include <math.h>
 
-
-#if defined(_WINDOWS)
-#define _USE_MATH_DEFINES
-#endif
-
 #if defined(_WINDOWS) && !defined(DEF_ROUND)
 #define DEF_ROUND 1
 static inline double round(double val) { return floor(val + 0.5); }

@@ -16,10 +16,6 @@
 
 #include "Profiler.h"
 
-#if defined _WIN32 && !(defined _USE_MATH_DEFINES)
-#define _USE_MATH_DEFINES
-#endif
-
 #include <cmath>
 
 
@@ -105,7 +101,7 @@ PercussiveAudioCurve::process(const double *R__ mag, size_t increment)
     }
 
     for (int n = 1; n <= sz; ++n) {
-	m_prevMag[n] = mag[n];
+	m_prevMag[n] = (float)mag[n];
     }
 
     if (nonZeroCount == 0) return 0;

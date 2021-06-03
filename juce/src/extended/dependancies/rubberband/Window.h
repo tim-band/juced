@@ -15,10 +15,6 @@
 #ifndef _RUBBERBAND_WINDOW_H_
 #define _RUBBERBAND_WINDOW_H_
 
-#if defined _WIN32 && !(defined _USE_MATH_DEFINES)
-#define _USE_MATH_DEFINES
-#endif
-
 #include <cmath>
 #include <iostream>
 #include <cstdlib>

@@ -26,10 +26,6 @@
 #ifndef __JUCE_STANDARDHEADER_JUCEHEADER__
 #define __JUCE_STANDARDHEADER_JUCEHEADER__
 
-#ifdef _WIN32
-#define _USE_MATH_DEFINES
-#endif
-
 //==============================================================================
 /** Current Juce version number.
 
@@ -70,10 +66,6 @@
 #if JUCE_MSVC
   #pragma warning (push)
   #pragma warning (disable: 4514 4245 4100)
-#endif
-
-#if defined _WIN32 && !(defined _USE_MATH_DEFINES)
-#define _USE_MATH_DEFINES
 #endif
 
 #include <cstdlib>

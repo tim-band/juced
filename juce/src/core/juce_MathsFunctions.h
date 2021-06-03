@@ -172,8 +172,8 @@ inline void swapVariables (Type& variable1, Type& variable2)
     int numElements = numElementsInArray (myArray) // returns 3
     @endcode
 */
-template <typename Type>
-inline int numElementsInArray (Type& array)         { return (int) (sizeof (array) / sizeof (array[0])); }
+template <typename Type, int N>
+inline int numElementsInArray (Type(&)[N]) { return N; }
 
 //==============================================================================
 // Some useful maths functions that aren't always present with all compilers and build settings.

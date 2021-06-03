@@ -48,7 +48,7 @@ function generic_configuration(name, basedir)
 
     --filter { "system:windows" }
     configuration "windows"
-        defines { "WIN32=1" }
+        defines { "WIN32=1", "_USE_MATH_DEFINES=1", "NOMINMAX=1" }
         targetdir (basedir .. "windows")
 
     --filter { "system:macosx" }
@@ -262,6 +262,7 @@ function configure_jost_libraries (standalone)
 
     configuration { "linux", "not disable-ladspa" }
         defines { "JOST_USE_LADSPA=1" }
+        includedirs { "../../juce/src/extended/dependancies/ladspa_sdk/src" }
 
     configuration { "linux", "disable-ladspa" }
         defines { "JOST_USE_LADSPA=0" }
